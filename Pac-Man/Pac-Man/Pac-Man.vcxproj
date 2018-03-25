@@ -72,6 +72,9 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>D:\Archieve\Coding\Source\Repos\165PacMan\Pac-Man\Pac-Man\freeglut;$(IncludePath)</IncludePath>
+    <ReferencePath>D:\Archieve\Coding\Source\Repos\165PacMan\Pac-Man\Pac-Man\freeglut;$(ReferencePath)</ReferencePath>
+    <LibraryPath>D:\Archieve\Coding\Source\Repos\165PacMan\Pac-Man\Pac-Man\freeglut;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -147,10 +150,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="App.h" />
+    <ClInclude Include="GlutApp.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="App.cpp" />
+    <ClCompile Include="GlutApp.cpp" />
     <ClCompile Include="Pac-Man.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include "stdafx.h"
-#include "Grid.h"
 
 
 class GlutApp {

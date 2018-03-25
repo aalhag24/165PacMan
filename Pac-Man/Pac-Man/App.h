@@ -13,7 +13,6 @@ public:
 	// Constructor, to initialize state
 	App(const char* label, int x, int y, int w, int h);
 
-	Grid Layout;
 
 	// These are the events we want to handle
 	void draw();

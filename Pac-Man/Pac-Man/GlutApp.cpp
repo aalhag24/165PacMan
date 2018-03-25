@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "GlutApp.h"
-#include "Grid.h"
 
 // Make this static so that it will not be accessible in other source files
 static GlutApp* app;
