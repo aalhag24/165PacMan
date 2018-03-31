@@ -2,7 +2,7 @@
 
  - Go ahead and clone the files for the 165PacMan Project
  - OR under [clone or download] click open in visual studio if you can see that
- - If Not, move the files to an apporpriate location and under [165Pac-Man/Pac-Man] open the {Pac-Man.sln}
+ - If Not, move the files to an apporpriate location and under [165Pac-Man/Pac-Man] open the [Pac-Man.sln]
  
  
  
