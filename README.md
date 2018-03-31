@@ -7,11 +7,11 @@
  
  
  - Once you open that solution file, Visual studio will pop out
- - On the top bar or VS[visual studio] where "File  Edit  View .... Help] is located
+ - On the top bar or VS[visual studio] where the [File  Edit  View .... Help] is located
  - Hover over "Debug" and go down to the botton where it will say "Pac-Man Properties"
  - On the right of that panel select [Configuration Properties]
  - Select [VC++ Directories]
- - Change the Include/Reference and Library Directory to the folder that named "freeglut"
+ - Change the Include/Reference and Library Directory to the folder that named [freeglut]
  
  
  
