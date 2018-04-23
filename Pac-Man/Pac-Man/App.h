@@ -4,6 +4,7 @@
 #include "GlutApp.h"
 #include "stdafx.h"
 #include "TexRect.h"
+#include "Board.h"
 
 
 class App : public GlutApp {
@@ -26,6 +27,9 @@ public:
 	bool isMoving;
 
 	TexRect* painting;
+	TexRect* background;
+
+	Board MainFrame;
 	//TexRect* background;
 };
 

@@ -151,6 +151,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
+    <ClInclude Include="Board.h" />
     <ClInclude Include="Border.h" />
     <ClInclude Include="GlutApp.h" />
     <ClInclude Include="Rect.h" />
@@ -163,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="Board.cpp" />
     <ClCompile Include="GlutApp.cpp" />
     <ClCompile Include="Pac-Man.cpp" />
     <ClCompile Include="RgbImage.cpp" />
@@ -178,6 +180,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="BackGround.bmp" />
     <Image Include="explode.bmp" />
     <Image Include="fireball.bmp" />
     <Image Include="monalisa.bmp" />

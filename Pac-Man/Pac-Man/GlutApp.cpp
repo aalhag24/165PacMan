@@ -11,6 +11,7 @@ GlutApp::GlutApp(const char* label, int x, int y, int w, int h) {
 	// Setup window position, size, and title
 	glutInitWindowPosition(x, y);
 	glutInitWindowSize(w, h);
+	/// glutFullScreen();
 	glutCreateWindow(label);
 
 	// Setup some OpenGL options
@@ -41,7 +42,7 @@ void GlutApp::windowToScene(float& x, float &y) {
 	y = 1.0f - (2.0f*(y / float(height)));
 	// Take care of issue in Windows where y coordinate is a little off
 #if defined WIN32
-	y -= 0.03;
+	y -= (float)0.03;
 #endif
 }
 

@@ -2,8 +2,10 @@
 #include "stdafx.h"
 
 
-TexRect::TexRect (const char* animation, const char* default_img, int rows, int cols, float x=0, float y=0, float w=0.5, float h=0.5)
-{
+TexRect::TexRect (const char* animation, const char* default_img, 
+	int rows, int cols, 
+	float x=0, float y=0, 
+	float w=0.5, float h=0.5){
 	glClearColor (0.0, 0.0, 0.0, 0.0);
 	glShadeModel(GL_FLAT);
 	glEnable(GL_DEPTH_TEST);

@@ -48,6 +48,9 @@
     <ClInclude Include="XY.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Board.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -66,6 +69,9 @@
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="TexRect.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Board.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -89,6 +95,9 @@
       <Filter>Header Files\ImageFiles</Filter>
     </Image>
     <Image Include="wall_old.bmp">
+      <Filter>Header Files\ImageFiles</Filter>
+    </Image>
+    <Image Include="BackGround.bmp">
       <Filter>Header Files\ImageFiles</Filter>
     </Image>
   </ItemGroup>

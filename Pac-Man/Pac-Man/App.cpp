@@ -30,12 +30,12 @@ App::App(const char* label, int x, int y, int w, int h) : GlutApp(label, x, y, w
 	mx = 0.0;
 	my = 0.0;
 
-	char* wall_file, painting_file;
 
-	//background = new TexRect("wall.bmp", -1, 1, 2, 2);
-	painting = new TexRect("explode.bmp", "mushroom.bmp", 5, 5, 0, 0.67, 0.5, 0.5);
+	//background = new TexRect("explode.bmp", "wall.bmp", 5, 5, -(float)1.0, (float)1.0, (float)2.0, (float)2.0);
+	//painting = new TexRect("explode.bmp", "mushroom.bmp", 5, 5, (float)0, (float)0.67, (float)0.5, (float)0.5);
 
 	isMoving = false;
+
 
 	/**
 	explode(0);
@@ -47,8 +47,11 @@ void App::draw() {
 	// Clear the screen
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	// Set background color to black
-	glClearColor(0.0, 0.0, 0.0, 1.0);
+
+
+	// Set up the transformations stack
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 
 	// Set up the transformations stack
 	glMatrixMode(GL_MODELVIEW);
@@ -57,44 +60,7 @@ void App::draw() {
 	// Set Color
 	glColor3d(1.0, 1.0, 1.0);
 
-	// Draw some points
-	glBegin(GL_POINTS);
-
-	glVertex2f(0.5, 0.5);
-	glVertex2f(0.5, -0.5);
-	glVertex2f(-0.5, -0.5);
-	glVertex2f(-0.5, 0.5);
-
-	glEnd();
-
-
-
-
-	// Draw a yellow cross
-	glColor3d(1.0, 1.0, 0.0);
-
-	glBegin(GL_LINES);
-
-	glVertex2f(mx - 0.05f, my);
-	glVertex2f(mx + 0.05f, my);
-
-	glVertex2f(mx, my - 0.05f);
-	glVertex2f(mx, my + 0.05f);
-
-	glEnd();
-	// Set background color to black
-	glClearColor(0.0, 0.0, 0.0, 1.0);
-
-	// Set up the transformations stack
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-
-	// Set Color
-	glColor3d(1.0, 1.0, 1.0);
-
-	painting->draw();
-
-	//background->draw();
+	MainFrame.draw();
 
 	glDisable(GL_TEXTURE_2D);
 
