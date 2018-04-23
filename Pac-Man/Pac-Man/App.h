@@ -3,6 +3,7 @@
 
 #include "GlutApp.h"
 #include "stdafx.h"
+#include "TexRect.h"
 
 
 class App : public GlutApp {
