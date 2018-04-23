@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\ImageFiles">
+      <UniqueIdentifier>{647e70d6-7b25-4c03-8771-a805232171e8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -25,6 +28,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GlutApp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Border.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Rect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RgbImage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TexRect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="XY.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -41,8 +62,34 @@
     <ClCompile Include="GlutApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RgbImage.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TexRect.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="explode.bmp">
+      <Filter>Header Files\ImageFiles</Filter>
+    </Image>
+    <Image Include="fireball.bmp">
+      <Filter>Header Files\ImageFiles</Filter>
+    </Image>
+    <Image Include="monalisa.bmp">
+      <Filter>Header Files\ImageFiles</Filter>
+    </Image>
+    <Image Include="mushroom.bmp">
+      <Filter>Header Files\ImageFiles</Filter>
+    </Image>
+    <Image Include="wall.bmp">
+      <Filter>Header Files\ImageFiles</Filter>
+    </Image>
+    <Image Include="wall_old.bmp">
+      <Filter>Header Files\ImageFiles</Filter>
+    </Image>
   </ItemGroup>
 </Project>
