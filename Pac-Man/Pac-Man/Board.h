@@ -5,20 +5,28 @@
 #include "TexRect.h"
 
 class Board {
-private:
 	TexRect * painting;
 	TexRect * background;
+	TexRect * title;
 
-	bool SelectionScreen;
+	bool SelectionScreen, isMoving, GameStarted;
 
+	int Score, Lives;
+
+	void Reset_Enemies();
+	void Reset_Dots();
+	void Reset_PacMan();
 public:
 	Board();
 	~Board();
 
 	void draw();
 
-	void handle();
-	void keyPressHandle();
+	void Handle(float, float);
+	void keyPressHandle(unsigned char);
+
+	void SScreen();
+	void GScreen();
 };
 
 #endif // !BOARD_H

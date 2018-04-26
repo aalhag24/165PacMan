@@ -1,11 +1,8 @@
 #include "TexRect.h"
-#include "stdafx.h"
 
 
-TexRect::TexRect (const char* animation, const char* default_img, 
-	int rows, int cols, 
-	float x=0, float y=0, 
-	float w=0.5, float h=0.5){
+TexRect::TexRect (const char* animation, const char* default_img, int rows, int cols, float x=0, float y=0, float w=0.5, float h=0.5)
+{
 	glClearColor (0.0, 0.0, 0.0, 0.0);
 	glShadeModel(GL_FLAT);
 	glEnable(GL_DEPTH_TEST);
@@ -85,8 +82,8 @@ void TexRect::draw()
         glEnable(GL_TEXTURE_2D);
         glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
-        float xinc = 1.0 / (float)cols;
-        float yinc = 1.0 / (float)rows;
+        float xinc = 1.0 / cols;
+        float yinc = 1.0 / rows;
 
         float top = 1 - yinc * (curr_row - 1);
         float bottom = 1 - yinc * curr_row;
@@ -114,7 +111,7 @@ void TexRect::draw()
     }
 }
 void TexRect::incY(){
-    y+=(float)0.01;
+    y+=0.01;
 }
 
 void TexRect::advance()

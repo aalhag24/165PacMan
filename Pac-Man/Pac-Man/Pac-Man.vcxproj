@@ -153,7 +153,14 @@
     <ClInclude Include="App.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="Border.h" />
+    <ClInclude Include="Character.h" />
+    <ClInclude Include="Dots.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="GlutApp.h" />
+    <ClInclude Include="Navigation.h" />
+    <ClInclude Include="Node.h" />
+    <ClInclude Include="Object.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="RgbImage.h" />
     <ClInclude Include="stdafx.h" />
@@ -165,8 +172,14 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Character.cpp" />
+    <ClCompile Include="Dots.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GlutApp.cpp" />
+    <ClCompile Include="Navigation.cpp" />
+    <ClCompile Include="Node.cpp" />
     <ClCompile Include="Pac-Man.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="RgbImage.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -185,6 +198,7 @@
     <Image Include="fireball.bmp" />
     <Image Include="monalisa.bmp" />
     <Image Include="mushroom.bmp" />
+    <Image Include="Title.bmp" />
     <Image Include="wall.bmp" />
     <Image Include="wall_old.bmp" />
   </ItemGroup>

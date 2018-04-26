@@ -30,13 +30,6 @@ App::App(const char* label, int x, int y, int w, int h) : GlutApp(label, x, y, w
 	mx = 0.0;
 	my = 0.0;
 
-
-	//background = new TexRect("explode.bmp", "wall.bmp", 5, 5, -(float)1.0, (float)1.0, (float)2.0, (float)2.0);
-	//painting = new TexRect("explode.bmp", "mushroom.bmp", 5, 5, (float)0, (float)0.67, (float)0.5, (float)0.5);
-
-	isMoving = false;
-
-
 	/**
 	explode(0);
     glutTimerFunc(20, move, 1);
@@ -46,8 +39,6 @@ App::App(const char* label, int x, int y, int w, int h) : GlutApp(label, x, y, w
 void App::draw() {
 	// Clear the screen
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-
 
 	// Set up the transformations stack
 	glMatrixMode(GL_MODELVIEW);
@@ -75,14 +66,7 @@ void App::mouseDown(float x, float y) {
 	mx = x;
 	my = y;
 
-	/**
-	if(painting->contains(mx, my) && !painting->ani_toggle){
-		painting->toggle();
-		painting->reset();
-		explode(0);
-	}
-
-	**/
+	MainFrame.Handle(x, y);
 	// Redraw the scene
 	redraw();
 }
@@ -104,19 +88,6 @@ void App::idle() {
 void App::keyUp(unsigned char key) {}
 
 void App::keyPress(unsigned char key) {
-	if (key == 27) {			// Exit the app when Esc key is pressed
-		delete painting;    //delete background;
-		exit(0);
-	}
-	else if (key == ' ') {
-		painting->reset();
-		painting->toggleReset();
-		redraw();
-	}
-
-	else if (key == '1') {
-		painting->toggleReset();
-	}
-
+	MainFrame.keyPressHandle(key); 
 }
 

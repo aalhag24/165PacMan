@@ -19,9 +19,6 @@
  */
 
 #include "RgbImage.h"
-#include "stdafx.h"
-
-#pragma warning(disable : 4996)
 
 #ifndef RGBIMAGE_DONT_USE_OPENGL
 
