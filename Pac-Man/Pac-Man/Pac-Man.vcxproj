@@ -194,13 +194,21 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="BackGround.bmp" />
+    <Image Include="Enemies.png" />
+    <Image Include="Exit1.png" />
+    <Image Include="Exit2.png" />
+    <Image Include="Exit3.png" />
+    <Image Include="Exit4.png" />
     <Image Include="explode.bmp" />
     <Image Include="fireball.bmp" />
-    <Image Include="monalisa.bmp" />
     <Image Include="mushroom.bmp" />
+    <Image Include="PacMan.png" />
+    <Image Include="PlayAgain.png" />
+    <Image Include="StartGame.png" />
     <Image Include="Title.bmp" />
     <Image Include="wall.bmp" />
     <Image Include="wall_old.bmp" />
+    <Image Include="YellowDot.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

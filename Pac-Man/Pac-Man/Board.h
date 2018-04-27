@@ -3,19 +3,27 @@
 
 #include "stdafx.h"
 #include "TexRect.h"
+#include "Object.h"
+#include "Dots.h"
 
 class Board {
 	TexRect * painting;
 	TexRect * background;
 	TexRect * title;
+	TexRect * StartGame;
+	TexRect * Exit;
+	TexRect * PlayAgain;
 
-	bool SelectionScreen, isMoving, GameStarted;
+	bool SelectionScreen, isMoving, GameStarted, Loss;
 
 	int Score, Lives;
 
 	void Reset_Enemies();
 	void Reset_Dots();
 	void Reset_PacMan();
+
+	vector<Object*> Stash;
+
 public:
 	Board();
 	~Board();
@@ -27,6 +35,7 @@ public:
 
 	void SScreen();
 	void GScreen();
+	void PAScreen();
 };
 
 #endif // !BOARD_H

@@ -124,9 +124,6 @@
     <Image Include="fireball.bmp">
       <Filter>Header Files\ImageFiles</Filter>
     </Image>
-    <Image Include="monalisa.bmp">
-      <Filter>Header Files\ImageFiles</Filter>
-    </Image>
     <Image Include="mushroom.bmp">
       <Filter>Header Files\ImageFiles</Filter>
     </Image>
@@ -140,6 +137,33 @@
       <Filter>Header Files\ImageFiles</Filter>
     </Image>
     <Image Include="Title.bmp">
+      <Filter>Header Files\ImageFiles</Filter>
+    </Image>
+    <Image Include="YellowDot.png">
+      <Filter>Header Files\ImageFiles</Filter>
+    </Image>
+    <Image Include="Enemies.png">
+      <Filter>Header Files\ImageFiles</Filter>
+    </Image>
+    <Image Include="Exit1.png">
+      <Filter>Header Files\ImageFiles</Filter>
+    </Image>
+    <Image Include="Exit2.png">
+      <Filter>Header Files\ImageFiles</Filter>
+    </Image>
+    <Image Include="Exit3.png">
+      <Filter>Header Files\ImageFiles</Filter>
+    </Image>
+    <Image Include="Exit4.png">
+      <Filter>Header Files\ImageFiles</Filter>
+    </Image>
+    <Image Include="PacMan.png">
+      <Filter>Header Files\ImageFiles</Filter>
+    </Image>
+    <Image Include="PlayAgain.png">
+      <Filter>Header Files\ImageFiles</Filter>
+    </Image>
+    <Image Include="StartGame.png">
       <Filter>Header Files\ImageFiles</Filter>
     </Image>
   </ItemGroup>

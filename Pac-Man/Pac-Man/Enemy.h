@@ -2,11 +2,15 @@
 #define ENEMY_H
 
 #include "Navigation.h"
-#include "Character.h"
+#include "Object.h"
 
-class Enemy: public Navigation, public Character {
-
+class Enemy: public Navigation, public Object {
 public:
+	Enemy(float, float);
+	~Enemy();
+
+	void draw();
+	bool contains(const Object &);
 
 };
 
