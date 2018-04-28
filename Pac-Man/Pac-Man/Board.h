@@ -25,8 +25,8 @@ class Board {
 
 	vector<Object*> Stash;
 	//Enemy *Uno, *Dos, *Tres;
-	Player *PacMan;
-	Navigation *Field;
+	Player * PacMan;
+	Navigation * Field;
 
 	void Reset_Enemies();
 	void Reset_Dots();

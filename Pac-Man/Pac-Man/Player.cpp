@@ -2,7 +2,7 @@
 #include "Player.h"
 
 Player::Player(Node *a) {
-	X = a->CX; Y = a->CY;
+//	X = a->CX; Y = a->CY;
 	curr = a;
 	Dir = 'L';
 
