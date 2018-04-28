@@ -2,14 +2,17 @@
 #define BOARD_H
 
 #include "stdafx.h"
+
 #include "TexRect.h"
 #include "Object.h"
 #include "Dots.h"
-#include <vector>
 #include "AnimatedRect.h"
+#include "Player.h"
+#include "Navigation.h"
+
+#include <vector>
 
 class Board {
-public:
 	TexRect * painting;
 	TexRect * background;
 	TexRect * Title;
@@ -17,18 +20,26 @@ public:
 	TexRect * Exit;
 	TexRect * PlayAgain;
 
-	//Navigation Field;
-
+	bool SelectionScreen, isMoving, GameStarted, Loss;
 	int Score, Lives;
+
+	vector<Object*> Stash;
+	//Enemy *Uno, *Dos, *Tres;
+	Player *PacMan;
+	Navigation *Field;
 
 	void Reset_Enemies();
 	void Reset_Dots();
 	void Reset_PacMan();
 
-	vector<Object*> Stash;
+	void SScreen();
+	void GScreen();
+	void PAScreen();
 
-	bool SelectionScreen, isMoving, GameStarted, Loss;
+	void ExitGame();
+	void ResetGame();
 
+public:
 	Board();
 	~Board();
 
@@ -36,10 +47,8 @@ public:
 
 	void Handle(float, float);
 	void keyPressHandle(unsigned char);
+	void specialKeyPressHandle(int);
 
-	void SScreen();
-	void GScreen();
-	void PAScreen();
 };
 
 #endif // !BOARD_H

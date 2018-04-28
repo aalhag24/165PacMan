@@ -5,6 +5,7 @@
 
 class Navigation {
 public:
+	Node * StartNode;
 	void (Navigation::*DIR)();
 
 	Navigation();

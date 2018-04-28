@@ -93,11 +93,41 @@ App::App(const char* label, int x, int y, int w, int h) : GlutApp(label, x, y, w
 }
 
 void App::specialKeyPress(int key) {
-
+	MainFrame->specialKeyPressHandle(key);
+/**
+	if (!game_over) {
+		if (key == 100) {
+			left = true;
+		}
+		if (key == 101) {
+			//up = true;
+		}
+		if (key == 102) {
+			right = true;
+		}
+		if (key == 103) {
+			//down = true;
+		}
+	}
+**/
 }
 
 void App::specialKeyUp(int key) {
+/**
+	if (key == 100) {
+		left = false;
+	}
+	if (key == 101) {
+		up = false;
+	}
+	if (key == 102) {
+		right = false;
+	}
+	if (key == 103) {
+		down = false;
+	}
 
+**/
 }
 
 void App::draw() {
@@ -129,6 +159,8 @@ void App::mouseDown(float x, float y) {
 	// Update app state
 	mx = x;
 	my = y;
+
+	cout << mx << " " << my << endl;
 
 	MainFrame->Handle(x, y);
 	// Redraw the scene

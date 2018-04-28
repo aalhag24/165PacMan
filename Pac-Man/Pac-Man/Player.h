@@ -8,9 +8,9 @@
 class Player : public Navigation, public Object{
 	Node * curr;
 	Node * prev;
-
-	char Dir;
 public:
+	char Dir;
+
 	Player(Node *);
 	~Player();
 

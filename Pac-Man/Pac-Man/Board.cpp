@@ -21,6 +21,8 @@ Board::Board(){
 	StartGame = new TexRect("StartGame.png", -0.82f, 0.4f, 1.62f, 0.4f);
 	Exit = new TexRect("Exit1.png", -0.6f, -0.2f, 1.1f, 0.35f);
 
+	Field = new Navigation();
+	PacMan = new Player(Field->StartNode);
 
 	SelectionScreen = true;
 	isMoving = false;
@@ -54,10 +56,18 @@ void Board::draw() {
 
 void Board::Handle(float x, float y){
 	if (Loss) {
-		//if(x >)
+		if (PlayAgain->contains(x, y))
+			ResetGame();
 	}
-	else if (SelectionScreen) {}
-	else {}
+	else if (SelectionScreen) {
+		if (StartGame->contains(x, y))
+			SelectionScreen = false;
+		if (Exit->contains(x, y))
+			ExitGame();
+	}
+	else {
+		// What does clicking do in game
+	}
 
 /**
 	if(painting->contains(mx, my) && !painting->ani_toggle){
@@ -73,13 +83,22 @@ void Board::keyPressHandle(unsigned char key) {
 		delete painting;		//delete background;
 		exit(0);
 	}
-	else if (key == ' ') {
-		//painting->reset();
-		//painting->toggleReset();
-		//redraw();
-	}
-	else if (key == '1') {
-		//painting->toggleReset();
+}
+
+void Board::specialKeyPressHandle(int key){
+	if (!SelectionScreen) {
+		if (key == 100) {
+			PacMan->Dir = 'L'; //left = true;
+		}
+		if (key == 101) {
+			PacMan->Dir = 'U'; //up = true;
+		}
+		if (key == 102) {
+			PacMan->Dir = 'R'; //right = true;
+		}
+		if (key == 103) {
+			PacMan->Dir = 'D'; //down = true;
+		}
 	}
 }
 
@@ -99,4 +118,11 @@ void Board::GScreen(){
 void Board::PAScreen() {
 	PlayAgain->draw();
 	Exit->draw();
+}
+
+void Board::ExitGame(){
+
+}
+
+void Board::ResetGame(){
 }
