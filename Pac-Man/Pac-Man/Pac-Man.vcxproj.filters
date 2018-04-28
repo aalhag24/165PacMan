@@ -69,6 +69,9 @@
     <ClInclude Include="Dots.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AnimatedRect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -107,6 +110,9 @@
     <ClCompile Include="Dots.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="AnimatedRect.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -128,9 +134,6 @@
       <Filter>Header Files\ImageFiles</Filter>
     </Image>
     <Image Include="BackGround.bmp">
-      <Filter>Header Files\ImageFiles</Filter>
-    </Image>
-    <Image Include="Title.bmp">
       <Filter>Header Files\ImageFiles</Filter>
     </Image>
     <Image Include="YellowDot.png">
@@ -158,6 +161,12 @@
       <Filter>Header Files\ImageFiles</Filter>
     </Image>
     <Image Include="StartGame.png">
+      <Filter>Header Files\ImageFiles</Filter>
+    </Image>
+    <Image Include="Title.png">
+      <Filter>Header Files\ImageFiles</Filter>
+    </Image>
+    <Image Include="Title2.png">
       <Filter>Header Files\ImageFiles</Filter>
     </Image>
   </ItemGroup>

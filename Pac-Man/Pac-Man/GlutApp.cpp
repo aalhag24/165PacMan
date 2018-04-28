@@ -11,7 +11,6 @@ GlutApp::GlutApp(const char* label, int x, int y, int w, int h) {
 	// Setup window position, size, and title
 	glutInitWindowPosition(x, y);
 	glutInitWindowSize(w, h);
-	/// glutFullScreen();
 	glutCreateWindow(label);
 
 	// Setup some OpenGL options
@@ -36,13 +35,14 @@ GlutApp::GlutApp(const char* label, int x, int y, int w, int h) {
 	glutPassiveMotionFunc(passiveCB);
 }
 
-void GlutApp::windowToScene(float& x, float &y) {
+void GlutApp::windowToScene(float& x, float &y)
+{
 	// Converting window coordinates [0..width] x [0..height] to [-1..1] x [-1..1]
 	x = (2.0f*(x / float(width))) - 1.0f;
 	y = 1.0f - (2.0f*(y / float(height)));
 	// Take care of issue in Windows where y coordinate is a little off
 #if defined WIN32
-	y -= (float)0.03;
+	y -= 0.03f;
 #endif
 }
 
@@ -51,6 +51,7 @@ void GlutApp::draw() {
 
 	// Clear the screen
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//	glClear(GL_COLOR_BUFFER_BIT);
 
 	// Set background color to black
 	glClearColor(0.0, 0.0, 0.0, 1.0);
@@ -113,20 +114,27 @@ void GlutApp::mouseCB(int b, int s, int x, int y) {
 	float my = (float)y;
 	app->windowToScene(mx, my);
 
-	if (b == 0) {						// Left clicked
-		if (s == 0) {		            // Left downed
+	// Determine button and state and call appropriate handler
+	if (b == 0) {
+		// Left click
+		if (s == 0) {
+			// Left down
 			app->mouseDown(mx, my);
 		}
 		else {
-			app->mouseUp(mx, my);		// Left release
+			// Left up
+			app->mouseUp(mx, my);
 		}
 	}
-	else {								// Right clicked
+	else {
+		// Right click
 		if (s == 0) {
-			app->mouseRightDown(mx, my);// Right downed
+			// Right down
+			app->mouseRightDown(mx, my);
 		}
 		else {
-			app->mouseRightUp(mx, my);	// Right release
+			// Right up
+			app->mouseRightUp(mx, my);
 		}
 	}
 }

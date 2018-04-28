@@ -1,10 +1,12 @@
 #include "stdafx.h"
 #include "Enemy.h"
 
-Enemy::Enemy(float x, float y) {
-	X = x; Y = y;
+Enemy::Enemy(Node *a) {
+	X = a->CX; Y = a->CY;
+	curr = a;
+	Dir = 'U';
 
-	Image = new TexRect("explode.bmp", "Enemies.png", 12, 12,
+	Image = new TexRect("Enemies.png",
 		-(float)1.0, (float)0.8, (float)2.0, (float)1.8);
 }
 

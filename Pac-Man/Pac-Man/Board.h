@@ -5,16 +5,19 @@
 #include "TexRect.h"
 #include "Object.h"
 #include "Dots.h"
+#include <vector>
+#include "AnimatedRect.h"
 
 class Board {
+public:
 	TexRect * painting;
 	TexRect * background;
-	TexRect * title;
+	TexRect * Title;
 	TexRect * StartGame;
 	TexRect * Exit;
 	TexRect * PlayAgain;
 
-	bool SelectionScreen, isMoving, GameStarted, Loss;
+	//Navigation Field;
 
 	int Score, Lives;
 
@@ -24,7 +27,8 @@ class Board {
 
 	vector<Object*> Stash;
 
-public:
+	bool SelectionScreen, isMoving, GameStarted, Loss;
+
 	Board();
 	~Board();
 

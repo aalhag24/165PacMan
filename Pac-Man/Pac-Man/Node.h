@@ -5,9 +5,9 @@
 #include "stdafx.h"
 
 class Node {
+public:
 	string Name;
 	float CX, CY;
-public:
 
 	Node(string,float, float);
 	Node(const Node &);

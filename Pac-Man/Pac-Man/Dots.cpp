@@ -1,9 +1,10 @@
+#include "stdafx.h"
 #include "Dots.h"
 
 Dots::Dots(float x, float y){
 	X = x; Y = y;
 
-	Image = new TexRect("explode.bmp", "YellowDot.png", 5, 5, 
+	Image = new TexRect("YellowDot.png", 
 		-(float)1.0, (float)0.8, (float)2.0, (float)1.8);
 }
 

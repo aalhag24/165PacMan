@@ -1,8 +1,17 @@
 #ifndef GlutApp_hpp
 #define GlutApp_hpp
 
-#include <iostream>
 #include "stdafx.h"
+
+#include <iostream>
+
+#if defined WIN32
+#include <freeglut.h>
+#elif defined __APPLE__
+#include <GLUT/glut.h>
+#else
+#include <GL/freeglut.h>
+#endif
 
 
 class GlutApp {
@@ -78,6 +87,5 @@ private:
 	// Called every time the mouse is moved
 	virtual void mouseMove(float x, float y) {}
 };
-
 
 #endif

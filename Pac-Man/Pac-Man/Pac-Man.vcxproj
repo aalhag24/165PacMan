@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\soil.1.16.0\build\native\soil.props" Condition="Exists('..\packages\soil.1.16.0\build\native\soil.props')" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -72,9 +73,9 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\Archieve\Coding\Source\Repos\165PacMan\Pac-Man\Pac-Man\freeglut;$(IncludePath)</IncludePath>
-    <ReferencePath>D:\Archieve\Coding\Source\Repos\165PacMan\Pac-Man\Pac-Man\freeglut;$(ReferencePath)</ReferencePath>
-    <LibraryPath>D:\Archieve\Coding\Source\Repos\165PacMan\Pac-Man\Pac-Man\freeglut;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Archieve\Coding\Source\Repos\165PacMan\Pac-Man\Pac-Man\SOIL;D:\Archieve\Coding\Source\Repos\165PacMan\Pac-Man\Pac-Man\freeglut;$(IncludePath)</IncludePath>
+    <ReferencePath>D:\Archieve\Coding\Source\Repos\165PacMan\Pac-Man\Pac-Man\SOIL;D:\Archieve\Coding\Source\Repos\165PacMan\Pac-Man\Pac-Man\freeglut;$(ReferencePath)</ReferencePath>
+    <LibraryPath>D:\Archieve\Coding\Source\Repos\165PacMan\Pac-Man\Pac-Man\SOIL;D:\Archieve\Coding\Source\Repos\165PacMan\Pac-Man\Pac-Man\freeglut;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -150,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AnimatedRect.h" />
     <ClInclude Include="App.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="Border.h" />
@@ -169,6 +171,7 @@
     <ClInclude Include="XY.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AnimatedRect.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Dots.cpp" />
@@ -203,7 +206,8 @@
     <Image Include="PacMan.png" />
     <Image Include="PlayAgain.png" />
     <Image Include="StartGame.png" />
-    <Image Include="Title.bmp" />
+    <Image Include="Title.png" />
+    <Image Include="Title2.png" />
     <Image Include="wall.bmp" />
     <Image Include="wall_old.bmp" />
     <Image Include="YellowDot.png" />
@@ -219,5 +223,6 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\nupengl.core.redist.0.1.0.1\build\native\nupengl.core.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\nupengl.core.redist.0.1.0.1\build\native\nupengl.core.redist.targets'))" />
     <Error Condition="!Exists('..\packages\nupengl.core.0.1.0.1\build\native\nupengl.core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\nupengl.core.0.1.0.1\build\native\nupengl.core.targets'))" />
+    <Error Condition="!Exists('..\packages\soil.1.16.0\build\native\soil.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\soil.1.16.0\build\native\soil.props'))" />
   </Target>
 </Project>

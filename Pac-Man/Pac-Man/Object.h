@@ -2,6 +2,7 @@
 #define OBJECT_H
 
 #include "TexRect.h"
+#include "AnimatedRect.h"
 
 class Object {
 public:

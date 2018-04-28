@@ -3,10 +3,15 @@
 
 #include "Navigation.h"
 #include "Object.h"
+#include "AnimatedRect.h"
 
 class Player : public Navigation, public Object{
+	Node * curr;
+	Node * prev;
+
+	char Dir;
 public:
-	Player(float, float);
+	Player(Node *);
 	~Player();
 
 	void draw();

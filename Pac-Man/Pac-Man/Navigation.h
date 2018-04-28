@@ -4,16 +4,9 @@
 #include "Node.h"
 
 class Navigation {
-
-/* THIS SHOULD BE IN PLAYER AND ENEMY
-
-Node * curr;
-Node * prev;
-
-typedef float(*fptr)();
-*/
-
 public:
+	void (Navigation::*DIR)();
+
 	Navigation();
 	~Navigation();
 
@@ -23,6 +16,7 @@ public:
 	void XDec();
 	void YInc();
 	void YDec();
+	void Idle();
 };
 
 #endif // !NAVIGATION_H

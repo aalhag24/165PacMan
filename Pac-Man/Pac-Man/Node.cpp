@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "Node.h"
 
 Node::Node(string n, float x, float y){
@@ -27,4 +28,5 @@ char Node::NodeDirection(const Node& a) {
 	else if (CX < a.CX) { return 'R'; }
 	else if (CY > a.CY) { return 'D'; }
 	else if (CY > a.CY) { return 'U'; }
+	else { return NULL; }
 }

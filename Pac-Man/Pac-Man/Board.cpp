@@ -12,18 +12,15 @@ void Board::Reset_PacMan(){
 }
 
 Board::Board(){
-	background = new TexRect("explode.bmp", "BackGround.bmp", 5, 5, 
-		-(float)1.0, (float)0.8, (float)2.0, (float)1.8);
-	painting = new TexRect("explode.bmp", "mushroom.bmp", 5, 5, 
-		(float)0, (float)0.67, (float)0.5, (float)0.5);
-	title = new TexRect("explode.bmp", "Title.bmp", 5, 5, 
-		-(float)0.8, (float)0.8, (float)0.2, (float)1.6);
-	StartGame = new TexRect("explode.bmp", "StartGame.png", 1, 1,
-		-(float)0.8, (float)0.4, (float)0.2, (float)1.6);
-	Exit = new TexRect("explode.bmp", "Exit.png", 1, 1,
-		-(float)0.8, -(float)0.4, (float)0.2, (float)1.6);
-	PlayAgain = new TexRect("explode.bmp", "PlayAgain.png", 1, 1,
-		-(float)0.8, -(float)0.4, (float)0.2, (float)1.6);
+	background = new TexRect("BackGround.bmp", -1.0f, 0.8f, 2.0f, 1.8f);
+	painting = new TexRect("mushroom.bmp",0.0f, 0.67f, 0.5f, 0.5f);
+
+	PlayAgain = new TexRect("PlayAgain.png",-0.8f, -0.4f, 1.6f, 0.4f);
+
+	Title = new TexRect("Title2.png", -0.8f, 1.0f, 1.7f, 0.6f);
+	StartGame = new TexRect("StartGame.png", -0.82f, 0.4f, 1.62f, 0.4f);
+	Exit = new TexRect("Exit1.png", -0.6f, -0.2f, 1.1f, 0.35f);
+
 
 	SelectionScreen = true;
 	isMoving = false;
@@ -34,19 +31,25 @@ Board::Board(){
 Board::~Board(){
 	delete background;
 	delete painting;
+	delete Title;
+	delete StartGame;
+	delete Exit;
+	delete PlayAgain;
 
 	for (vector<Object*>::iterator it = Stash.begin(); it != Stash.end(); ++it)
 		delete (*it);
 }
 
 void Board::draw() {
-	//painting->draw();
+/**
 	if (Loss)
 		PAScreen();
 	else if(SelectionScreen)
 		SScreen();
 	else
 		GScreen();
+*/
+	SScreen();
 }
 
 void Board::Handle(float x, float y){
@@ -71,17 +74,17 @@ void Board::keyPressHandle(unsigned char key) {
 		exit(0);
 	}
 	else if (key == ' ') {
-		painting->reset();
-		painting->toggleReset();
+		//painting->reset();
+		//painting->toggleReset();
 		//redraw();
 	}
 	else if (key == '1') {
-		painting->toggleReset();
+		//painting->toggleReset();
 	}
 }
 
 void Board::SScreen(){
-	title->draw();
+	Title->draw();
 	StartGame->draw();
 	Exit->draw();
 }
@@ -91,8 +94,6 @@ void Board::GScreen(){
 	
 	for (vector<Object*>::iterator it = Stash.begin(); it != Stash.end(); ++it)
 		(*it)->draw();
-
-
 }
 
 void Board::PAScreen() {
