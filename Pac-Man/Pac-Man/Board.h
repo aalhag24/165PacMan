@@ -12,6 +12,8 @@
 
 #include <vector>
 
+using namespace std;
+
 class Board {
 	TexRect * painting;
 	TexRect * background;

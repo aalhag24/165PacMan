@@ -198,6 +198,10 @@ void Board::GScreen(){
 	glVertex2f(0.1, -0.75);
 	glVertex2f(0.1, -0.915);
 
+	glVertex2f(-0.12, -0.05);
+	glVertex2f(0.0, -0.05);
+	glVertex2f(0.12, -0.05);
+
 	glEnd();
 
 	background->draw();
@@ -214,3 +218,4 @@ void Board::ExitGame(){
 
 void Board::ResetGame(){
 }
+

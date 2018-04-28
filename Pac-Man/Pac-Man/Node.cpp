@@ -1,15 +1,15 @@
 #include "stdafx.h"
 #include "Node.h"
 
-Node::Node(string n, float x, float y){
+Node::Node(int n, float x, float y){
 	CX = x; CY = y;
-	Name = n;
+	ID = n;
 }
 
 Node::Node(const Node &a){
 	CX = a.CX;
 	CY = a.CY;
-	Name = a.Name;
+	ID = a.ID;
 }
 
 Node::~Node(){

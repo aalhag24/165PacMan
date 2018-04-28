@@ -6,10 +6,10 @@
 
 class Node {
 public:
-	string Name;
+	int ID;
 	float CX, CY;
 
-	Node(string,float, float);
+	Node(int,float, float);
 	Node(const Node &);
 	~Node();
 
