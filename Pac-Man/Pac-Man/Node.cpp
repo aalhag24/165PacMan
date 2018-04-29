@@ -13,8 +13,10 @@ Node::Node(const Node &a){
 }
 
 Node::~Node(){
-	for (std::vector<Node*>::iterator it = adj.begin(); it != adj.end(); ++it)
+	for (std::vector<Node*>::iterator it = adj.begin(); it != adj.end(); ++it) {
+		//(*it) = NULL;
 		delete (*it);
+	}
 	adj.clear();
 }
 
@@ -24,7 +26,7 @@ void Node::addEdge(Node *a){
 }
 
 char Node::NodeDirection(const Node& a) {
-	if (CX > a.CX) { return 'L';  }
+		 if (CX > a.CX) { return 'L';  }
 	else if (CX < a.CX) { return 'R'; }
 	else if (CY > a.CY) { return 'D'; }
 	else if (CY > a.CY) { return 'U'; }

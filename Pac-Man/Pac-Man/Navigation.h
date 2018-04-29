@@ -3,29 +3,26 @@
 
 #include "stdafx.h"
 #include "Node.h"
+#include "Object.h"
 
 #include <iomanip>
 #include <fstream>
 #include <vector>
+#include <algorithm>
+#include <iterator>
 
 using namespace std;
 
 class Navigation {
 public:
 	Node * StartNode;
-	void (Navigation::*DIR)();
+	void (Object::*DIR)();
 	vector<Node*> List;
 
 	Navigation();
 	~Navigation();
 
 	void Initialize();
-
-	void XInc();
-	void XDec();
-	void YInc();
-	void YDec();
-	void Idle();
 };
 
 #endif // !NAVIGATION_H

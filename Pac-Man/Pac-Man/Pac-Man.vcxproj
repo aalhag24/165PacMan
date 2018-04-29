@@ -202,6 +202,8 @@
     <Image Include="Exit4.png" />
     <Image Include="explode.bmp" />
     <Image Include="fireball.bmp" />
+    <Image Include="loading.gif" />
+    <Image Include="Loading.png" />
     <Image Include="mushroom.bmp" />
     <Image Include="PacMan.png" />
     <Image Include="PlayAgain.png" />
@@ -211,6 +213,10 @@
     <Image Include="wall.bmp" />
     <Image Include="wall_old.bmp" />
     <Image Include="YellowDot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="DotsList.txt" />
+    <Text Include="Nodes.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

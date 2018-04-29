@@ -169,5 +169,19 @@
     <Image Include="Title2.png">
       <Filter>Header Files\ImageFiles</Filter>
     </Image>
+    <Image Include="loading.gif">
+      <Filter>Header Files\ImageFiles</Filter>
+    </Image>
+    <Image Include="Loading.png">
+      <Filter>Header Files\ImageFiles</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Nodes.txt">
+      <Filter>Header Files</Filter>
+    </Text>
+    <Text Include="DotsList.txt">
+      <Filter>Header Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

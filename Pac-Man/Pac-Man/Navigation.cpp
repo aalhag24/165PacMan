@@ -1,17 +1,28 @@
 #include "stdafx.h"
 #include "Navigation.h"
 
-Navigation::Navigation()
-{
+Navigation::Navigation(){
 }
 
-Navigation::~Navigation()
-{
+Navigation::~Navigation(){
+	StartNode = NULL;
+	delete StartNode;
+
+	DIR = NULL;
+
+	for (vector<Node*>::iterator it = List.begin(); it != List.end(); ++it) {
+		/*for (vector<Node*>::iterator itt = (*it)->adj.begin(); itt != (*it)->adj.end(); ++itt){
+			(*itt) = NULL;
+			delete (*itt);
+		}*/
+		(*it) = NULL;
+		delete (*it);
+	}
 }
 
 void Navigation::Initialize(){
 	ifstream inFile;
-	int Num, ID; float XVal, YVal;
+	int Num, ID; float XVal, YVal, pos = 0, NAdj;
 	ifstream myfile("Nodes.txt", ios::out | ios::binary);
 
 	if (!myfile.is_open()) {
@@ -21,31 +32,27 @@ void Navigation::Initialize(){
 
 	while (myfile.is_open()) {
 		myfile >> Num >> XVal;
+		if (Num == 101)
+			break;
 		for (int i = 0; i < Num; i++) {
 			myfile >> ID >> YVal;
-			//Add Node ID, XVal, YVal;
+			Node *p = new Node(ID, XVal, YVal);
+			List.push_back(p);
 		}
 	}
+
+	while (myfile.is_open()) {
+		myfile >> Num >> NAdj;
+		if(Num == 102)
+			break;
+		for (int i = 0; i < NAdj; i++) {
+			myfile >> pos;
+			List[Num]->addEdge(List[pos]);
+		}
+	}
+
+	StartNode = List[0];
 
 	inFile.close();
 }
 
-void Navigation::XInc()
-{
-}
-
-void Navigation::XDec()
-{
-}
-
-void Navigation::YInc()
-{
-}
-
-void Navigation::YDec()
-{
-}
-
-void Navigation::Idle()
-{
-}

@@ -8,7 +8,7 @@
 class Dots: public Object {
 	//char* animation, * default_img;
 public:
-	Dots(float, float);
+	Dots(int, float, float);
 	~Dots();
 	
 	void draw();

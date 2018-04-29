@@ -1,11 +1,13 @@
 #include "stdafx.h"
 #include "Dots.h"
 
-Dots::Dots(float x, float y){
+Dots::Dots(int i, float x, float y){
 	X = x; Y = y;
+	isVisible = true;
+	ID = i;
+	float spacer = 0.01;
 
-	Image = new TexRect("YellowDot.png", 
-		-(float)1.0, (float)0.8, (float)2.0, (float)1.8);
+	Image = new TexRect("YellowDot.png", X-spacer, Y+spacer, (float)0.02, (float)0.02);
 }
 
 Dots::~Dots() {

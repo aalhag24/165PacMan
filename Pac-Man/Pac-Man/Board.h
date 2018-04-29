@@ -11,6 +11,10 @@
 #include "Navigation.h"
 
 #include <vector>
+#include <ctime>
+#include <iostream>
+#include <chrono>
+#include <thread>
 
 using namespace std;
 
@@ -21,6 +25,7 @@ class Board {
 	TexRect * StartGame;
 	TexRect * Exit;
 	TexRect * PlayAgain;
+	TexRect * Loading;
 
 	bool SelectionScreen, isMoving, GameStarted, Loss;
 	int Score, Lives;
@@ -46,6 +51,7 @@ public:
 	~Board();
 
 	void draw();
+	void Initialize();
 
 	void Handle(float, float);
 	void keyPressHandle(unsigned char);
