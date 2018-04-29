@@ -8,11 +8,12 @@
 class Dots: public Object {
 	//char* animation, * default_img;
 public:
-	Dots(int, float, float);
+	Dots(float, float);
 	~Dots();
 	
 	void draw();
 	bool contains(const Object &G);
+	bool contains(const float, const float);
 };
 
 #endif // !DOTS_H

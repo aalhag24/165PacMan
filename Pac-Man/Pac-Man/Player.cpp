@@ -18,13 +18,3 @@ Player::~Player() {
 	delete curr;
 	delete prev;
 }
-
-void Player::draw() {
-	Image->draw();
-}
-
-bool Player::contains(const Object &G) {
-	float l = sqrt(pow(G.X - X, 2) + pow(G.Y - Y, 2));
-	if (l < ((G.W + W) / 2)) { return true; }
-	else { return false; }
-}

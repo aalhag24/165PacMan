@@ -22,7 +22,7 @@ Navigation::~Navigation(){
 
 void Navigation::Initialize(){
 	ifstream inFile;
-	int Num, ID; float XVal, YVal, pos = 0, NAdj;
+	int Num, ID, pos = 0; float XVal, YVal, NAdj;
 	ifstream myfile("Nodes.txt", ios::out | ios::binary);
 
 	if (!myfile.is_open()) {

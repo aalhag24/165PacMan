@@ -16,13 +16,3 @@ Enemy::Enemy(Node *a) {
 Enemy::~Enemy() {
 	delete Image;
 }
-
-void Enemy::draw() {
-	Image->draw();
-}
-
-bool Enemy::contains(const Object &G) {
-	float l = sqrt(pow(G.X - X, 2) + pow(G.Y - Y, 2));
-	if (l < ((G.W + W)/2)) { return true; }
-	else { return false; }
-}

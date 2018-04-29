@@ -75,7 +75,7 @@ void Board::Initialize(){
 			break;
 		for (int i = 0; i < Num; i++) {
 			myfile >> YVal;
-			Object *p = new Dots(ID, XVal, YVal);
+			Object *p = new Dots(XVal, YVal);
 			Stash.push_back(p);
 			cout << "Dot " << ID << endl;
 			ID++;
@@ -96,7 +96,11 @@ void Board::Handle(float x, float y){
 			ExitGame();
 	}
 	else {
-		// What does clicking do in game
+		cout << "Here" << endl;
+		for (vector<Object*>::iterator it = Stash.begin(); it != Stash.end(); ++it) {
+			if ((*it)->contains(x, y))
+				cout << "dot: " << (*it)->X << " " << (*it)->Y << endl;
+		}
 	}
 
 /**

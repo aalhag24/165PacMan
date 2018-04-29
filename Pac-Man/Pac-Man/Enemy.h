@@ -13,9 +13,6 @@ class Enemy: public Navigation, public Object {
 public:
 	Enemy(Node *);
 	~Enemy();
-
-	void draw();
-	bool contains(const Object &);
 };
 
 #endif // !ENEMY_H

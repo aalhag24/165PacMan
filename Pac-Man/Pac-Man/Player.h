@@ -13,9 +13,6 @@ public:
 
 	Player(Node *);
 	~Player();
-
-	void draw();
-	bool contains(const Object &);
 };
 
 #endif // !PLAYER_H
