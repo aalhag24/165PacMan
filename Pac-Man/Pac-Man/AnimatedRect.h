@@ -24,25 +24,34 @@ class AnimatedRect {
     
     int curr_row;
     int curr_col;
-    
+
     bool complete;
     bool animating;
 public:
     AnimatedRect (const char*, int, int, float, float, float, float);
     
-    bool done();
+	void (AnimatedRect::*DIR)();
+	//DIR = &Idle;
+	bool contains(float, float);
     
     void draw();
+    void advance(char);
     
-    void advance();
-    
-    void incY();
-    
-    void reset();
+    void incY(float);
+	void decY(float);
+	void incX(float);
+	void decX(float);
+	void Idle();
     
     void animate();
-    
+	void reset();
     void stop();
+
+	bool done();
+
+	void setPos(const char);
+	float getw()const;
+	float geth()const;
 };
 
 #endif

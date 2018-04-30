@@ -16,7 +16,6 @@ using namespace std;
 class Navigation {
 public:
 	Node * StartNode;
-	void (Object::*DIR)();
 	vector<Node*> List;
 
 	Navigation();

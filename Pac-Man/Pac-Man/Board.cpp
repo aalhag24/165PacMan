@@ -2,13 +2,23 @@
 #include "stdafx.h"
 
 void Board::Reset_Enemies(){
+
 }
 
 void Board::Reset_Dots(){
-	//Stash.push_back(new Dots(0, 0));
+	for (vector<Object*>::iterator it = Stash.begin(); it != Stash.end(); ++it)
+		(*it)->isVisible = true;
 }
 
 void Board::Reset_PacMan(){
+	PacMan->X = Field->List[0]->CX;
+	PacMan->Y = Field->List[0]->CY;
+	PacMan->curr = Field->List[0];
+	PacMan->prev = NULL;
+	PacMan->Dir = 'L';
+	PacMan->Image->setPos(PacMan->Dir);
+	PacMan->isVisible = true;
+	PacMan->Image->reset();
 }
 
 Board::Board(){
@@ -25,6 +35,8 @@ Board::Board(){
 	Field = new Navigation();
 	Field->Initialize();
 	PacMan = new Player(Field->StartNode);
+	PacMan->Image->setPos(PacMan->Dir);
+	PacMan->Image->animate();
 	Initialize();
 
 	SelectionScreen = true;
@@ -98,8 +110,10 @@ void Board::Handle(float x, float y){
 	else {
 		cout << "Here" << endl;
 		for (vector<Object*>::iterator it = Stash.begin(); it != Stash.end(); ++it) {
-			if ((*it)->contains(x, y))
+			if ((*it)->contains(x, y)) {
 				cout << "dot: " << (*it)->X << " " << (*it)->Y << endl;
+				(*it)->isVisible = false;
+			}
 		}
 	}
 
@@ -134,6 +148,7 @@ void Board::specialKeyPressHandle(int key){
 		if (key == 103) {
 			PacMan->Dir = 'D'; //down = true;
 		}
+		PacMan->Image->setPos(PacMan->Dir);
 	}
 }
 
@@ -144,106 +159,13 @@ void Board::SScreen(){
 }
 
 void Board::GScreen(){
+	//background->draw();
+	PacMan->draw();
+
 	for (vector<Object*>::iterator it = Stash.begin(); it != Stash.end(); ++it)
-		(*it)->draw();
-/**
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	glColor3f(1.0, 1.0, 1.0);
+		if((*it)->isVisible)
+			(*it)->draw();
 
-	glBegin(GL_POINTS);
-	glVertex2f(0.0f, 0.13f);
-	glVertex2f(0.0f, -0.57f);
-
-	glColor3f(1.0, 1.0, 0.0);
-	glVertex2f(-0.53f, 0.7f);
-	glVertex2f(-0.53f, 0.48f);
-	glVertex2f(-0.53f, -0.05f);
-	glVertex2f(-0.53f, 0.305f);
-	glVertex2f(-0.53f, -0.39f);
-	glVertex2f(-0.53f, -0.57f);
-	glVertex2f(-0.53f, -0.75f);
-
-	glVertex2f(0.53f, 0.7f);
-	glVertex2f(0.53f, 0.48f);
-	glVertex2f(0.53f, 0.305f);
-	glVertex2f(0.53f, -0.05f);
-	glVertex2f(0.53f, -0.39f);
-	glVertex2f(0.53f, -0.57f);
-	glVertex2f(0.53f, -0.75f);
-
-	glColor3d(0.0, 1.0, 1.0);
-	glVertex2f(-0.88f, 0.7f);
-	glVertex2f(-0.88f, 0.48f);
-	glVertex2f(-0.88f, 0.305f);
-	glVertex2f(-0.88f, -0.39f);
-	glVertex2f(-0.88f, -0.57f);
-	glVertex2f(-0.88f, -0.75f);
-	glVertex2f(-0.88f, -0.915f);
-
-	glVertex2f(0.88f, 0.7f);
-	glVertex2f(0.88f, 0.48f);
-	glVertex2f(0.88f, 0.305f);
-	glVertex2f(0.88f, -0.39f);
-	glVertex2f(0.88f, -0.57f);
-	glVertex2f(0.88f, -0.75f);
-	glVertex2f(0.88f, -0.915f);
-
-	glColor3d(0.0, 0.0, 1.0);
-	glVertex2f(0.74f, -0.57f);
-	glVertex2f(0.74f, -0.75f);
-
-	glVertex2f(-0.74f, -0.57f);
-	glVertex2f(-0.74f, -0.75f);
-
-	glColor3d(0.0, 1.0, 0.0);
-	glVertex2f(-0.32f, 0.48f);
-	glVertex2f(-0.32f, 0.305f);
-	glVertex2f(-0.32f, 0.125f);
-	glVertex2f(-0.32f, -0.05f);
-	glVertex2f(-0.32f, -0.24f);
-	glVertex2f(-0.32f, -0.39f);
-	glVertex2f(-0.32f, -0.57f);
-	glVertex2f(-0.32f, -0.75f);
-
-	glVertex2f(0.32f, 0.48f);
-	glVertex2f(0.32f, 0.305f);
-	glVertex2f(0.32f, 0.125f);
-	glVertex2f(0.32f, -0.05f);
-	glVertex2f(0.32f, -0.24f);
-	glVertex2f(0.32f, -0.39f);
-	glVertex2f(0.32f, -0.57f);
-	glVertex2f(0.32f, -0.75f);
-
-	glColor3d(1.0, 0.0, 1.0);
-	glVertex2f(-0.1f, 0.7f);
-	glVertex2f(-0.1f, 0.48f);
-	glVertex2f(-0.1f, 0.305f);
-	glVertex2f(-0.1f, 0.125f);
-	glVertex2f(-0.1f, -0.39f);
-	glVertex2f(-0.1f, -0.57f);
-	glVertex2f(-0.1f, -0.75f);
-	glVertex2f(-0.1f, -0.915f);
-
-	glVertex2f(0.1f, 0.7f);
-	glVertex2f(0.1f, 0.48f);
-	glVertex2f(0.1f, 0.305f);
-	glVertex2f(0.1f, 0.125f);
-	glVertex2f(0.1f, -0.39f);
-	glVertex2f(0.1f, -0.57f);
-	glVertex2f(0.1f, -0.75f);
-	glVertex2f(0.1f, -0.915f);
-
-	glColor3d(1.0, 1.0, 1.0);
-	glVertex2f(-0.12f, -0.05f);
-	glVertex2f(0.0f, -0.05f);
-	glVertex2f(0.12f, -0.05f);
-
-	glVertex2f(-0.999f, -0.05f);
-	glVertex2f(0.999f, -0.05f);
-
-	glEnd();
-**/
 	background->draw();
 }
 

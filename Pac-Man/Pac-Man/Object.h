@@ -9,7 +9,7 @@ public:
 	bool isVisible;
 	static int ID;
 	float X, Y, W, H;
-	TexRect * Image;
+	AnimatedRect *Image;
 
 	void draw() {
 		Image->draw();
@@ -22,16 +22,9 @@ public:
 	}
 
 	bool contains(const float x, const float y) {
-		float radius = 0.05;
-		if ((x + radius > X && x - radius < X) && (y + radius > Y && y - radius < Y)) { return true; }
-		else { return false; }
+		float radius = 0.04f;
+		return x - radius <= X && x + radius >= X && y - radius <= Y && y + radius >= Y;
 	}
-
-	void XInc() { X += 0.01f; }
-	void XDec() { X -= 0.01f; }
-	void YInc() { Y += 0.01f; }
-	void YDec() { Y -= 0.01f; }
-	void Idle() {}
 };
 
 int Object::ID=0;

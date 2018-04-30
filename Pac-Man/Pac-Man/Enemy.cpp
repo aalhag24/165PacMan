@@ -7,10 +7,7 @@ Enemy::Enemy(Node *a) {
 	Dir = 'U';
 	isVisible = true;
 
-	DIR = &Object::Idle;
-
-	Image = new TexRect("Enemies.png",
-		-(float)1.0, (float)0.8, (float)2.0, (float)1.8);
+	Image = new AnimatedRect("Enemies.png", 1, 1, X, Y, 0.1f, 0.1f);
 }
 
 Enemy::~Enemy() {

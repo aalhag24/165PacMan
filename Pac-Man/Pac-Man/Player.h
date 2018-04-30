@@ -6,10 +6,11 @@
 #include "AnimatedRect.h"
 
 class Player : public Navigation, public Object{
+public:
 	Node * curr;
 	Node * prev;
-public:
 	char Dir;
+	AnimatedRect * Images;
 
 	Player(Node *);
 	~Player();

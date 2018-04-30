@@ -8,8 +8,6 @@ Navigation::~Navigation(){
 	StartNode = NULL;
 	delete StartNode;
 
-	DIR = NULL;
-
 	for (vector<Node*>::iterator it = List.begin(); it != List.end(); ++it) {
 		/*for (vector<Node*>::iterator itt = (*it)->adj.begin(); itt != (*it)->adj.end(); ++itt){
 			(*itt) = NULL;
@@ -51,7 +49,7 @@ void Navigation::Initialize(){
 		}
 	}
 
-	StartNode = List[0];
+	StartNode = List[1];
 
 	inFile.close();
 }

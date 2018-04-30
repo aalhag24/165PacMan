@@ -2,19 +2,21 @@
 #include "Player.h"
 
 Player::Player(Node *a) {
-//	X = a->CX; Y = a->CY;
 	curr = a;
 	Dir = 'L';
 	isVisible = true;
+	X = a->CX; Y = a->CY;
 
-	DIR = &Object::Idle;
+	Image = new AnimatedRect("PacMan2.png", 4, 5, X, Y, 0.1f, 0.1f);
+	Image->decX(Image->getw()/2);
+	Image->incY(Image->geth()/2);
 
-	Image = new TexRect("PacMan.png",
-		-(float)1.0, (float)0.8, (float)2.0, (float)1.8);
+	Image->DIR = &AnimatedRect::Idle;
+	//DIR = &Idle;
 }
 
 Player::~Player() {
-	delete Image;
+	//delete Image;
 	delete curr;
 	delete prev;
 }
