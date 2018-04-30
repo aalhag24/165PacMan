@@ -9,6 +9,7 @@
 #include "AnimatedRect.h"
 #include "Player.h"
 #include "Navigation.h"
+#include "App.h"
 
 #include <vector>
 #include <ctime>
@@ -27,13 +28,13 @@ class Board {
 	TexRect * PlayAgain;
 	TexRect * Loading;
 
-	bool SelectionScreen, isMoving, GameStarted, Loss;
-	int Score, Lives;
-
 	vector<Object*> Stash;
+	Navigation * Field;
+
 	//Enemy *Uno, *Dos, *Tres;
 	Player * PacMan;
-	Navigation * Field;
+
+	int Score, Lives;
 
 	void Reset_Enemies();
 	void Reset_Dots();
@@ -47,6 +48,8 @@ class Board {
 	void ResetGame();
 
 public:
+	bool SelectionScreen, isMoving, GameStarted, Loss;
+
 	Board();
 	~Board();
 
@@ -57,6 +60,13 @@ public:
 	void keyPressHandle(unsigned char);
 	void specialKeyPressHandle(int);
 
+	void Advance();
+	void ChangePMDir();
+	void Move();
+
+	bool Reached();
+	bool Collide();
+	bool Points();
 };
 
 #endif // !BOARD_H

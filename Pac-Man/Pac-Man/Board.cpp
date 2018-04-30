@@ -1,6 +1,7 @@
 #include "Board.h"
 #include "stdafx.h"
 
+
 void Board::Reset_Enemies(){
 
 }
@@ -108,7 +109,6 @@ void Board::Handle(float x, float y){
 			ExitGame();
 	}
 	else {
-		cout << "Here" << endl;
 		for (vector<Object*>::iterator it = Stash.begin(); it != Stash.end(); ++it) {
 			if ((*it)->contains(x, y)) {
 				cout << "dot: " << (*it)->X << " " << (*it)->Y << endl;

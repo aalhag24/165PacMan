@@ -134,7 +134,7 @@ float AnimatedRect::getw() const { return w; }
 float AnimatedRect::geth() const { return h; }
 
 
-void AnimatedRect::advance(char D = 'L') {
+void AnimatedRect::advance() {
 	if (curr_col < cols) {
 		curr_col++;
 	}

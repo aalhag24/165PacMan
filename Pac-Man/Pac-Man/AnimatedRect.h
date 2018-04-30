@@ -35,7 +35,7 @@ public:
 	bool contains(float, float);
     
     void draw();
-    void advance(char);
+    void advance();
     
     void incY(float);
 	void decY(float);

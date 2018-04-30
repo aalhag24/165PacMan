@@ -1,83 +1,34 @@
 #include "App.h"
 #include "stdafx.h"
 
-static App* singleton;
-
-/**
-void explode(int value){
-	if (!singleton->painting->done()){
-		singleton->painting->advance();
-		singleton->redraw();
-		glutTimerFunc(32, explode, value);
-	}
-}
-
-void move(int value){
-	if (singleton->isMoving){
-		singleton->painting->incY();
-		singleton->redraw();
-		glutTimerFunc(32, move, value);
-	}
-}
-
+static App* MF;
 
 void app_timer(int value) {
-	if (singleton->MainFrame.SelectionScreen) {
-		singleton->MainFrame.Title->animate();
-		glutTimerFunc(100, app_timer, value);
-	}
-
-	if (singleton->moving) {
-		singleton->ball->jump();
-		float bx = singleton->ball->x + singleton->ball->w / 2;
-		float by = singleton->ball->y - singleton->ball->h + 0.1;
-		if (singleton->platform->contains(bx, by)) {
-			singleton->ball->rising = true;
-			singleton->ball->yinc += 0.005;
-			singleton->ball->xinc = singleton->ball->yinc;
-			if (singleton->ball->yinc > 0.15) {
-				singleton->ball->yinc = 0.15;
-			}
+	if (!MF->MainFrame->SelectionScreen && !MF->MainFrame->Loss) {
+		//singleton->MainFrame.Title->animate();
+		MF->MainFrame->Advance(); //MF->MainFrame->PacMan->Image->advance();
+		if (MF->MainFrame->Reached()) {
+			MF->MainFrame->ChangePMDir();
+			MF->MainFrame->Move();
 		}
+		if (MF->MainFrame->Collide()) { //Ememies and PacMan Collide
 
-		if (singleton->ball->y - singleton->ball->h < -0.99) {
-			singleton->moving = false;
-			singleton->game_over = true;
-			singleton->gameOver->animate();
+		}
+		if (MF->MainFrame->Points()) { //PacMan collision with dots gets points
 
 		}
 	}
-	if (singleton->up) {
-		singleton->platform->moveUp(0.05);
-	}
-	if (singleton->down) {
-		singleton->platform->moveDown(0.05);
-	}
-	if (singleton->left) {
-		singleton->platform->moveLeft(0.05);
-	}
-	if (singleton->right) {
-		singleton->platform->moveRight(0.05);
-	}
+	if (MF->MainFrame->Loss) {
 
-	if (singleton->game_over) {
-		singleton->redraw();
-		glutTimerFunc(100, app_timer, value);
 	}
-	else {
-		if (singleton->up || singleton->down || singleton->left || singleton->right || singleton->moving && !singleton->game_over) {
-			singleton->redraw();
-			glutTimerFunc(16, app_timer, value);
-		}
-	}
-
+	MF->redraw();
+	glutTimerFunc(100, app_timer, value);
 }
-*/
 
 
 App::App(const char* label, int x, int y, int w, int h) : GlutApp(label, x, y, w, h) {
 	// Initialize state variables
-	singleton = this;
+	MF = this;
 
 	mx = 0.0;
 	my = 0.0;
