@@ -304,6 +304,14 @@ void Board::ResetGame(){
 void Board::Advance(){
 	PacMan->Image->advance();
 	PacMan->Image->Shift(PacMan->Dir);
+	/*
+	Uno->Image->advance();
+	Uno->Image->Shift(PacMan->Dir);
+	Dos->Image->advance();
+	Dos->Image->Shift(PacMan->Dir);
+	Tres->Image->advance();
+	Tres->Image->Shift(PacMan->Dir);
+	*/
 }
 void Board::ChangePMDir() {
 	bool check = true;

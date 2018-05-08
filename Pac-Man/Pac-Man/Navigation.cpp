@@ -9,10 +9,6 @@ Navigation::~Navigation(){
 	delete StartNode;
 
 	for (vector<Node*>::iterator it = List.begin(); it != List.end(); ++it) {
-		/*for (vector<Node*>::iterator itt = (*it)->adj.begin(); itt != (*it)->adj.end(); ++itt){
-			(*itt) = NULL;
-			delete (*itt);
-		}*/
 		(*it) = NULL;
 		delete (*it);
 	}
