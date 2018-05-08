@@ -7,7 +7,6 @@
 #include <string>
 
 Board::Board(){
-	Started = false;
 	background = new TexRect("BackGround.bmp", -1.0f, 0.8f, 2.0f, 1.8f);
 	painting = new TexRect("mushroom.bmp",0.0f, 0.67f, 0.5f, 0.5f);
 
@@ -32,6 +31,7 @@ Board::Board(){
 	GameStarted = false;
 	Loss = false;
 	Started = true;
+	Won = false;
 
 	Score = 0;
 	Lives = 1;
@@ -63,7 +63,6 @@ void Board::draw() {
 		GScreen();
 }
 void Board::Initialize(){
-	ifstream inFile;
 	int Num, ID; float XVal, YVal, pos = 0;
 	ifstream myfile("DotsList.txt", ios::out | ios::binary);
 
@@ -79,12 +78,31 @@ void Board::Initialize(){
 			break;
 		for (int i = 0; i < Num; i++) {
 			myfile >> YVal;
-			Object *p = new Dots(XVal, YVal);
+			Object *p = new Dots(XVal, YVal, ID);
 			Stash.push_back(p);
 			ID++;
 		}
 	}
-	inFile.close();
+	myfile.close();
+
+	ifstream myfile2("SDotsList.txt", ios::out | ios::binary);
+	if (!myfile2.is_open()) {
+		cout << "Unable to open file";
+		exit(1);
+	}
+	while (myfile2.is_open()) {
+		myfile2 >> Num >> XVal;
+		if (Num == 101)
+			break;
+		for (int i = 0; i < Num; i++) {
+			myfile2 >> YVal;
+			Object *p = new SDots(XVal, YVal, ID);
+			Stash.push_back(p);
+			ID++;
+		}
+	}
+	myfile2.close();
+
 }
 
 void Board::Handle(float x, float y){
@@ -156,6 +174,7 @@ void Board::GScreen(){
 		if((*it)->isVisible)
 			(*it)->draw();
 
+
 	string text, Text;
 	text = to_string(Score);
 	int liv = 1;
@@ -221,19 +240,35 @@ void Board::Reset_Dots() {
 		(*it)->isVisible = true;
 }
 void Board::Reset_PacMan() {
-	PacMan->X = Field->List[0]->CX;
-	PacMan->Y = Field->List[0]->CY;
 	PacMan->prev = Field->List[0];
-	PacMan->next = NULL;
 	PacMan->Dir = ' ';
-	PacMan->Image->setPos('L');
-	PacMan->isVisible = true;
-	PacMan->Image->reset();
+	PacMan->X = 0.0f;
+	PacMan->Y = -0.57f;
+	PacMan->Image->setx(PacMan->X);
+	PacMan->Image->sety(PacMan->Y);
+	PacMan->Image->decX(PacMan->Image->getw() / 2);
+	PacMan->Image->incY(PacMan->Image->geth() / 2);
+
+	cout << Field->List[0]->CX << " " << Field->List[0]->CY << endl;
+	
+	PacMan->Image->pause();
+	PacMan->Image->setPos(' ');
 }
 void Board::ResetGame(){
+	Field->Initialize();
 	Reset_Dots();
 	Reset_PacMan();
-	Reset_Enemies();
+	//Reset_Enemies();
+
+	SelectionScreen = false;
+	isMoving = false;
+	GameStarted = false;
+	Loss = false;
+	Started = true;
+	Won = false;
+
+	Score = 0;
+	Lives = 1;
 }
 
 
@@ -313,9 +348,18 @@ void Board::Points(){
 			diff = sqrt(pow(PacMan->Image->getx() - (*it)->X, 2) + pow(PacMan->Image->gety() - (*it)->Y, 2));
 			if (diff < 4*(PacMan->Image->getw()/5)) {
 				(*it)->isVisible = false;
-				Score++;
+				if ((*it)->id >= 212) {
+					Score += 100;
+				}
+				else {
+					Score += 10;
+				}
 			}
 		}
+	}
+	if (Score >= 25) {
+		cout << "Won" << endl;
+		Won = true;
 	}
 }
 
@@ -332,6 +376,9 @@ bool Board::Ready() {
 }
 bool Board::Status() { 
 	return (PacMan->next == nullptr); 
+}
+bool Board::Winning(){
+	return Won;
 }
 char Board::Switch(char D) {
 	switch (D) {

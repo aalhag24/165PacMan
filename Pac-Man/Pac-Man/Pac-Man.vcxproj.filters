@@ -72,6 +72,9 @@
     <ClInclude Include="AnimatedRect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SDots.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -111,6 +114,9 @@
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="AnimatedRect.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SDots.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -178,12 +184,18 @@
     <Image Include="Score.png">
       <Filter>Header Files\ImageFiles</Filter>
     </Image>
+    <Image Include="PurpleDot.png">
+      <Filter>Header Files\ImageFiles</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Nodes.txt">
       <Filter>Header Files</Filter>
     </Text>
     <Text Include="DotsList.txt">
+      <Filter>Header Files</Filter>
+    </Text>
+    <Text Include="SDotsList.txt">
       <Filter>Header Files</Filter>
     </Text>
   </ItemGroup>

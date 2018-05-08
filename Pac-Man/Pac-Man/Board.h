@@ -10,6 +10,7 @@
 #include "Player.h"
 #include "Navigation.h"
 #include "App.h"
+#include "SDots.h"
 
 #include <vector>
 #include <ctime>
@@ -49,13 +50,14 @@ class Board {
 	void PAScreen();
 
 	void ExitGame();
-	void ResetGame();
 
 	bool Aproximate(float, float);
 	char Switch(char);
 
 public:
-	bool SelectionScreen, isMoving, GameStarted, Loss, Started = false;
+	bool SelectionScreen, isMoving, 
+		 GameStarted, Loss, 
+		 Started = false, Won;
 
 	Board();
 	~Board();
@@ -69,6 +71,7 @@ public:
 
 	void Advance();
 	void ChangePMDir();
+	void ResetGame();
 	void drawText(const char *text, int length, int x, int y);
 
 	bool Reached();
@@ -78,6 +81,7 @@ public:
 	bool Availiable();
 	bool Ready();
 	bool Status();
+	bool Winning();
 
 };
 

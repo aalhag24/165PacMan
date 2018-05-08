@@ -8,6 +8,7 @@ class Object {
 public:
 	bool isVisible;
 	static int ID;
+	int id;
 	float X, Y, W, H;
 	AnimatedRect *Image;
 

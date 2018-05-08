@@ -1,18 +1,18 @@
-#ifndef DOTS_H
-#define DOTS_H
+#ifndef SDOTS_H
+#define SDOTS_H
 
 #include "TexRect.h"
 #include "Object.h"
 #include <cmath>
 
-class Dots: public Object {
+class SDots : public Object {
 	//char* animation, * default_img;
 public:
-	Dots(float, float,int);
-	~Dots();
-	
+	SDots(float, float,int);
+	~SDots();
+
 	void draw();
 };
 
-#endif // !DOTS_H
+#endif // !SDOTS_H
 

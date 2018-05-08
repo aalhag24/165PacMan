@@ -1,12 +1,13 @@
 #include "stdafx.h"
 #include "Dots.h"
 
-Dots::Dots(float x, float y){
+Dots::Dots(float x, float y, int i){
 	X = x; Y = y;
 	isVisible = true;
 	float spacer = 0.01f;
 
 	Image = new AnimatedRect("YellowDot.png", 1, 1, X - spacer, Y + spacer, 0.02f, 0.02f);
+	id = i;
 	//Image = new AnimatedRect("YellowDot.png", 1, 1, X, Y, 0.02f, 0.02f);
 
 }

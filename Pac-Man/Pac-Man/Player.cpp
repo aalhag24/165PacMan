@@ -12,6 +12,7 @@ Player::Player(Node *a) {
 	Image->decX(Image->getw()/2);
 	Image->incY(Image->geth()/2);
 
+
 	//DIR = &Idle;
 }
 

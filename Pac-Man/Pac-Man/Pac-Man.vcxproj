@@ -164,6 +164,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="RgbImage.h" />
+    <ClInclude Include="SDots.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TexRect.h" />
@@ -182,6 +183,7 @@
     <ClCompile Include="Pac-Man.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RgbImage.cpp" />
+    <ClCompile Include="SDots.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -207,6 +209,7 @@
     <Image Include="mushroom.bmp" />
     <Image Include="PacMan.png" />
     <Image Include="PlayAgain.png" />
+    <Image Include="PurpleDot.png" />
     <Image Include="Score.png" />
     <Image Include="StartGame.png" />
     <Image Include="Title.png" />
@@ -218,6 +221,7 @@
   <ItemGroup>
     <Text Include="DotsList.txt" />
     <Text Include="Nodes.txt" />
+    <Text Include="SDotsList.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
