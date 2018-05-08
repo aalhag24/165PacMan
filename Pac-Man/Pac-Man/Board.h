@@ -35,6 +35,8 @@ class Board {
 	Player * PacMan;
 
 	int Score, Lives;
+	float Error;
+	char Choice,NextDir;
 
 	void Reset_Enemies();
 	void Reset_Dots();
@@ -46,9 +48,13 @@ class Board {
 
 	void ExitGame();
 	void ResetGame();
+	void swap(Node *, Node *);
+
+	bool Aproximate(float, float);
+	char Switch(char);
 
 public:
-	bool SelectionScreen, isMoving, GameStarted, Loss;
+	bool SelectionScreen, isMoving, GameStarted, Loss, Started = false;
 
 	Board();
 	~Board();
@@ -62,11 +68,14 @@ public:
 
 	void Advance();
 	void ChangePMDir();
-	void Move();
 
 	bool Reached();
 	bool Collide();
 	bool Points();
+
+	bool Availiable();
+	bool Ready();
+	bool Status();
 };
 
 #endif // !BOARD_H

@@ -7,13 +7,17 @@
 
 class Player : public Navigation, public Object{
 public:
-	Node * curr;
+	Node * next;
 	Node * prev;
 	char Dir;
 	AnimatedRect * Images;
 
-	Player(Node *);
+	Player(Node*);
 	~Player();
+
+	bool getChoice(char);
+	bool NextChoice(char);
+	bool setChoice(char);
 };
 
 #endif // !PLAYER_H

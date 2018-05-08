@@ -49,7 +49,7 @@ void Navigation::Initialize(){
 		}
 	}
 
-	StartNode = List[1];
+	StartNode = List[0];
 
 	inFile.close();
 }

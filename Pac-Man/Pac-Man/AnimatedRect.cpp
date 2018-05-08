@@ -36,6 +36,8 @@ AnimatedRect::AnimatedRect (const char* map_filename, int rows, int cols, float 
     
     complete = false;
     animating = false;
+	paniced = false;
+	Adv = true;
 }
 
 void AnimatedRect::draw(){
@@ -79,8 +81,6 @@ void AnimatedRect::draw(){
 			float left = xinc * (curr_col - 1);
 			float right = xinc * curr_col;
 
-			cout << curr_col << endl;
-
 			glBegin(GL_QUADS);
 
 			glTexCoord2f(left, bottom);
@@ -102,60 +102,60 @@ void AnimatedRect::draw(){
 	}
 }
 
-void AnimatedRect::incY(float Y = 0.01f) { y+=Y; }
-void AnimatedRect::decY(float Y = 0.01f) { y -=Y; }
+void AnimatedRect::incY(float Y = 0.01f) { y += Y; }
+void AnimatedRect::decY(float Y = 0.01f) { y -= Y; }
 void AnimatedRect::incX(float X = 0.01f) { x += X; }
 void AnimatedRect::decX(float X = 0.01f) { x -= X; }
-void AnimatedRect::Idle() {}
+void AnimatedRect::Idle(float noValue) {}
 
 void AnimatedRect::reset() { complete = false; }
 void AnimatedRect::animate() { animating = true; }
 void AnimatedRect::stop() { animating = false; }
+void AnimatedRect::pause() { Adv = false; }
+void AnimatedRect::resume() { Adv = true; }
 
 bool AnimatedRect::contains(float mx, float my) {
 	return mx >= x && mx <= x + w && my <= y && my >= y - h;
 }
 bool AnimatedRect::done() { return complete; }
 
+void AnimatedRect::Shift(char D) {
+	switch (D) {
+		case 'R': incX(); break;
+		case 'L': decX(); break;
+		case 'D': decY(); break;
+		case 'U': incY(); break;
+		default:  break;
+	}
+}
 void AnimatedRect::setPos(const char D){
-	if (D == 'R')
-		curr_row = 1;
-	else if (D == 'L')
-		curr_row = 2;
-	else if (D == 'D')
-		curr_row = 3;
-	else if (D == 'U')
-		curr_row = 4;
-	else
-		curr_row = 1;
+	switch (D){
+		case 'R': curr_row = 1; break;
+		case 'L': curr_row = 2; break;
+		case 'D': curr_row = 3; break;
+		case 'U': curr_row = 4; break;
+		default:   break;
+	}
 }
 
+void AnimatedRect::setx(const float X){
+}
+
+void AnimatedRect::sety(const float Y){
+}
+
+float AnimatedRect::getx() const{ return x; }
+float AnimatedRect::gety() const { return y; }
 float AnimatedRect::getw() const { return w; }
 float AnimatedRect::geth() const { return h; }
 
-
 void AnimatedRect::advance() {
-	if (curr_col < cols) {
-		curr_col++;
-	}
-	else {
-		curr_col = 1;
-	}
-	/*
-	else {
-		if (curr_row < rows) {
-			curr_row++;
-			curr_col = 1;
+	if (Adv) {
+		if (curr_col < cols) {
+			curr_col++;
 		}
 		else {
-			curr_row = 1;
 			curr_col = 1;
 		}
-
-		curr_col = 1;
 	}
-	if (curr_col == cols) {
-		complete = true;
-	}
-	*/
 }

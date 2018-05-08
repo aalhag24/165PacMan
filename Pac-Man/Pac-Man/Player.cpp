@@ -2,7 +2,8 @@
 #include "Player.h"
 
 Player::Player(Node *a) {
-	curr = a;
+	prev = a;
+	next = nullptr;
 	Dir = 'L';
 	isVisible = true;
 	X = a->CX; Y = a->CY;
@@ -11,12 +12,38 @@ Player::Player(Node *a) {
 	Image->decX(Image->getw()/2);
 	Image->incY(Image->geth()/2);
 
-	Image->DIR = &AnimatedRect::Idle;
 	//DIR = &Idle;
 }
 
 Player::~Player() {
 	//delete Image;
-	delete curr;
+	delete next;
 	delete prev;
+}
+
+bool Player::getChoice(char D){
+	if (next->NodeDirection(prev) == D) {
+		return true;
+	}
+	return false;
+}
+
+// Finds if the next Choice is a valid one
+bool Player::NextChoice(char D){
+	for (vector<Node*>::iterator it = next->Adj.begin(); it != next->Adj.end(); ++it) {
+		if (next->NodeDirection(*it) == D) {
+			return true;
+		}
+	}
+	return false;
+}
+
+// Sets the Initial Choice when the game starts
+bool Player::setChoice(char D) {
+	for (vector<Node*>::iterator it = prev->Adj.begin(); it != prev->Adj.end(); ++it) {
+		if (prev->NodeDirection(*it) == D) {
+			return true;
+		}
+	}
+	return false;
 }

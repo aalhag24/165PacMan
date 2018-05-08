@@ -27,10 +27,12 @@ class AnimatedRect {
 
     bool complete;
     bool animating;
+	bool paniced;
+	bool Adv;
 public:
     AnimatedRect (const char*, int, int, float, float, float, float);
     
-	void (AnimatedRect::*DIR)();
+	void (AnimatedRect::*DIR)(float);
 	//DIR = &Idle;
 	bool contains(float, float);
     
@@ -41,15 +43,24 @@ public:
 	void decY(float);
 	void incX(float);
 	void decX(float);
-	void Idle();
+	void Idle(float);
+
+	void Shift(char);
     
     void animate();
 	void reset();
     void stop();
+	void pause();
+	void resume();
 
 	bool done();
 
 	void setPos(const char);
+	void setx(const float);
+	void sety(const float);
+
+	float getx()const;
+	float gety()const;
 	float getw()const;
 	float geth()const;
 };
