@@ -161,3 +161,7 @@ void AnimatedRect::advance() {
 		}
 	}
 }
+
+void AnimatedRect::setRow(int a) {
+	curr_col = a;
+}

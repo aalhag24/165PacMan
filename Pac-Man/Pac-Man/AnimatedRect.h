@@ -63,6 +63,8 @@ public:
 	float gety()const;
 	float getw()const;
 	float geth()const;
+
+	void setRow(int);
 };
 
 #endif

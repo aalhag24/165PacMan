@@ -19,12 +19,30 @@ Board::Board(){
 	StartGame = new TexRect("StartGame.png", -0.65f, 0.4f, 1.2f, 0.4f);
 	Exit = new TexRect("Exit1.png", -0.6f, -0.5f, 1.1f, 0.35f);
 
+
 	Field = new Navigation();
 	Field->Initialize();
 	PacMan = new Player(Field->StartNode);
 	PacMan->Image->setPos(' ');
 	PacMan->Image->animate();
 	Initialize();
+
+	Uno = new Enemy(Field->List[66]);
+		Uno->Image->animate();
+		Uno->setRow(1);
+		Uno->Image->setPos('L');
+		Uno->Image->pause();
+
+	Dos = new Enemy(Field->List[67]);
+		Dos->Image->animate();
+		Dos->setRow(2);
+		Dos->Image->setPos('R');
+		Dos->Image->pause();
+	Tres = new Enemy(Field->List[68]);
+		Tres->Image->animate();
+		Tres->setRow(3);
+		Tres->Image->setPos('L');
+		Tres->Image->pause();
 
 	SelectionScreen = true;
 	isMoving = false;
@@ -104,11 +122,13 @@ void Board::Initialize(){
 	myfile2.close();
 
 }
-
 void Board::Handle(float x, float y){
 	if (Loss) {
-		if (PlayAgain->contains(x, y))
+		if (PlayAgain->contains(x, y)) {
 			ResetGame();
+			SelectionScreen = true;
+			Loss = false;
+		}
 	}
 	else if (SelectionScreen) {
 		if (StartGame->contains(x, y))
@@ -132,7 +152,9 @@ void Board::keyPressHandle(unsigned char key) {
 		Stash.clear();
 		delete Field;
 
-		//delete *Uno, *Dos, *Tres;
+		delete Uno;
+		delete Dos;
+		delete Tres;
 		delete PacMan;
 		exit(0);
 	}
@@ -169,6 +191,10 @@ void Board::GScreen(){
 	PacMan->draw();
 	ScoreSign->draw();
 	LiveSign->draw();
+
+	Uno->draw();
+	Dos->draw();
+	Tres->draw();
 	
 	for (vector<Object*>::iterator it = Stash.begin(); it != Stash.end(); ++it)
 		if((*it)->isVisible)
@@ -359,7 +385,7 @@ void Board::Points(){
 			}
 		}
 	}
-	if (Score >= 2500) {
+	if (Score >= 250) {
 		cout << "Won" << endl;
 		Won = true;
 	}

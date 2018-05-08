@@ -11,6 +11,7 @@
 #include "Navigation.h"
 #include "App.h"
 #include "SDots.h"
+#include "Enemy.h"
 
 #include <vector>
 #include <ctime>
@@ -34,7 +35,7 @@ class Board {
 	vector<Object*> Stash;
 	Navigation * Field;
 
-	//Enemy *Uno, *Dos, *Tres;
+	Enemy *Uno, *Dos, *Tres;
 	Player * PacMan;
 
 	int Score, Lives;

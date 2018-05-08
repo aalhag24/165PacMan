@@ -1,5 +1,6 @@
 #include "App.h"
 #include "stdafx.h"
+#include "Enemy.h"
 
 static App* MF;
 
@@ -17,7 +18,7 @@ void app_timer(int value) {
 
 		}
 		if (MF->MainFrame->Winning()) {
-			MF->MainFrame->ResetGame();
+			MF->MainFrame->Loss = true;
 		}
 		MF->MainFrame->Points();  //PacMan collision with dots gets points
 	}

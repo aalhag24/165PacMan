@@ -6,13 +6,19 @@
 #include "AnimatedRect.h"
 
 class Enemy: public Navigation, public Object {
-	Node * curr;
+	Node * next;
 	Node * prev;
 
 	char Dir;
 public:
 	Enemy(Node *);
 	~Enemy();
+
+	bool getChoice(char);
+	bool NextChoice(char);
+	bool setChoice(char);
+
+	void setRow(int);
 };
 
 #endif // !ENEMY_H
