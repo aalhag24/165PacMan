@@ -17,7 +17,7 @@ void app_timer(int value) {
 
 		}
 		if (MF->MainFrame->Winning()) {
-			//MF->MainFrame->ResetGame();
+			MF->MainFrame->ResetGame();
 		}
 		MF->MainFrame->Points();  //PacMan collision with dots gets points
 	}

@@ -255,12 +255,14 @@ void Board::Reset_PacMan() {
 	PacMan->Image->setPos(' ');
 }
 void Board::ResetGame(){
+	delete Field;
+	Field = new Navigation();
 	Field->Initialize();
 	Reset_Dots();
 	Reset_PacMan();
 	//Reset_Enemies();
 
-	SelectionScreen = false;
+	SelectionScreen = true;
 	isMoving = false;
 	GameStarted = false;
 	Loss = false;
@@ -357,7 +359,7 @@ void Board::Points(){
 			}
 		}
 	}
-	if (Score >= 25) {
+	if (Score >= 2500) {
 		cout << "Won" << endl;
 		Won = true;
 	}
