@@ -385,7 +385,7 @@ void Board::Points(){
 			}
 		}
 	}
-	if (Score >= 250) {
+	if (Score >= 2500) {
 		cout << "Won" << endl;
 		Won = true;
 	}
