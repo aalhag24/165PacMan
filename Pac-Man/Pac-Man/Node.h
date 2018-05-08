@@ -19,6 +19,7 @@ public:
 	void addEdge(Node *);
 	char NodeDirection(Node *);
 	Node* getNext(char);
+	bool isNotOption(char);
 };
 
 #endif // !NODE_H

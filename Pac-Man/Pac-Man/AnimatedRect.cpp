@@ -139,9 +139,11 @@ void AnimatedRect::setPos(const char D){
 }
 
 void AnimatedRect::setx(const float X){
+	x = X;
 }
 
 void AnimatedRect::sety(const float Y){
+	y = Y;
 }
 
 float AnimatedRect::getx() const{ return x; }

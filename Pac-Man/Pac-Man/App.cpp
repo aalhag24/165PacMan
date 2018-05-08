@@ -8,19 +8,15 @@ void app_timer(int value) {
 		//singleton->MainFrame.Title->animate();
 		MF->MainFrame->Advance();
 		if (MF->MainFrame->Status()) {
-				cout << "First" << endl;
 			MF->MainFrame->ChangePMDir();
 		}
 		else if (MF->MainFrame->Reached()) {
-				cout << "Reached" << endl;
 			MF->MainFrame->ChangePMDir();
 		}
 		if (MF->MainFrame->Collide()) { //Ememies and PacMan Collide
 
 		}
-		if (MF->MainFrame->Points()) { //PacMan collision with dots gets points
-
-		}
+		MF->MainFrame->Points();  //PacMan collision with dots gets points
 	}
 
 	MF->redraw();

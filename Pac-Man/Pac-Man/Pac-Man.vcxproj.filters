@@ -175,6 +175,9 @@
     <Image Include="Loading.png">
       <Filter>Header Files\ImageFiles</Filter>
     </Image>
+    <Image Include="Score.png">
+      <Filter>Header Files\ImageFiles</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Nodes.txt">

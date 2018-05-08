@@ -27,6 +27,8 @@ class Board {
 	TexRect * Exit;
 	TexRect * PlayAgain;
 	TexRect * Loading;
+	TexRect * ScoreSign;
+	TexRect * LiveSign;
 
 	vector<Object*> Stash;
 	Navigation * Field;
@@ -48,7 +50,6 @@ class Board {
 
 	void ExitGame();
 	void ResetGame();
-	void swap(Node *, Node *);
 
 	bool Aproximate(float, float);
 	char Switch(char);
@@ -68,14 +69,16 @@ public:
 
 	void Advance();
 	void ChangePMDir();
+	void drawText(const char *text, int length, int x, int y);
 
 	bool Reached();
 	bool Collide();
-	bool Points();
+	void Points();
 
 	bool Availiable();
 	bool Ready();
 	bool Status();
+
 };
 
 #endif // !BOARD_H

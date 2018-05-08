@@ -207,6 +207,7 @@
     <Image Include="mushroom.bmp" />
     <Image Include="PacMan.png" />
     <Image Include="PlayAgain.png" />
+    <Image Include="Score.png" />
     <Image Include="StartGame.png" />
     <Image Include="Title.png" />
     <Image Include="Title2.png" />

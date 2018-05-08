@@ -50,6 +50,8 @@ void Navigation::Initialize(){
 	}
 
 	StartNode = List[0];
+	LeftEdge = List[5];
+	RightEdge = List[12];
 
 	inFile.close();
 }

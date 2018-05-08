@@ -45,9 +45,13 @@ void Node::addEdge(Node *a){
 }
 
 char Node::NodeDirection(Node* a){
+	if (a == nullptr) {
+		return ' ';
+	}
+
 	if (CX < a->CX) { return 'R'; }
 	else if (CX > a->CX) { return 'L'; }
-	else if (CY < a->CY) { return 'U'; }
+	if (CY < a->CY) { return 'U'; }
 	else if (CY > a->CY) { return 'D'; }
 	else { return ' '; }
 }
@@ -59,4 +63,13 @@ Node * Node::getNext(char D){
 			return (*it);
 	}
 	return nullptr;
+}
+
+bool Node::isNotOption(char D) {
+	std::vector<Node*>::iterator it = Adj.begin();
+	for (; it != Adj.end(); ++it) {
+		if (NodeDirection((*it)) == D)
+			false;
+	}
+	return true;
 }

@@ -1,6 +1,10 @@
 #include "Board.h"
 #include "stdafx.h"
 #include <cassert>
+#include <iostream>    
+#include <iomanip> 
+#include <sstream>
+#include <string>
 
 Board::Board(){
 	Started = false;
@@ -9,6 +13,8 @@ Board::Board(){
 
 	PlayAgain = new TexRect("PlayAgain.png",-0.8f, -0.4f, 1.6f, 0.4f);
 	Loading = new TexRect("Loading.png", -0.8f, -0.4f, 1.6f, 0.4f);
+	ScoreSign = new TexRect("Score.bmp", -0.95f, 1.0f, 0.4f, 0.2f);
+	LiveSign = new TexRect("Lives.bmp", 0.1f, 1.0f, 0.4f, 0.2f);
 
 	Title = new TexRect("Title2.png", -0.8f, 1.0f, 1.7f, 0.6f);
 	StartGame = new TexRect("StartGame.png", -0.65f, 0.4f, 1.2f, 0.4f);
@@ -26,6 +32,9 @@ Board::Board(){
 	GameStarted = false;
 	Loss = false;
 	Started = true;
+
+	Score = 0;
+	Lives = 1;
 
 	Error = 0.01f;
 }
@@ -89,18 +98,24 @@ void Board::Handle(float x, float y){
 		if (Exit->contains(x, y))
 			ExitGame();
 	}
-	else {
-		for (vector<Object*>::iterator it = Stash.begin(); it != Stash.end(); ++it) {
-			if ((*it)->contains(x, y)) {
-				//cout << "dot: " << (*it)->X << " " << (*it)->Y << endl;
-				(*it)->isVisible = false;
-			}
-		}
-	}
 }
 void Board::keyPressHandle(unsigned char key) {
 	if (key == 27) {			// Exit the app when Esc key is pressed
-		delete painting;		//delete background;
+		delete painting;
+		delete background;
+		delete Title;
+		delete StartGame;
+		delete Exit;
+		delete PlayAgain;
+		delete Loading;
+		delete ScoreSign;
+		delete LiveSign;
+
+		Stash.clear();
+		delete Field;
+
+		//delete *Uno, *Dos, *Tres;
+		delete PacMan;
 		exit(0);
 	}
 }
@@ -134,10 +149,19 @@ void Board::SScreen(){
 void Board::GScreen(){
 	//background->draw();
 	PacMan->draw();
-
+	ScoreSign->draw();
+	LiveSign->draw();
+	
 	for (vector<Object*>::iterator it = Stash.begin(); it != Stash.end(); ++it)
 		if((*it)->isVisible)
 			(*it)->draw();
+
+	string text, Text;
+	text = to_string(Score);
+	int liv = 1;
+	Text = to_string(liv);
+	drawText(text.data(), text.size(), 140, 468);
+	drawText(Text.data(), Text.size(), 400, 468);
 
 	background->draw();
 }
@@ -145,9 +169,48 @@ void Board::PAScreen() {
 	PlayAgain->draw();
 	Exit->draw();
 }
+void Board::ExitGame() {
+	delete painting;
+	delete background;
+	delete Title;
+	delete StartGame;
+	delete Exit;
+	delete PlayAgain;
+	delete Loading;
+	delete ScoreSign;
+	delete LiveSign;
 
-void Board::ExitGame(){
+	Stash.clear();
+	delete Field;
 
+	//delete *Uno, *Dos, *Tres;
+	delete PacMan;
+	exit(0);
+}
+
+void Board::drawText(const char *text, int length, int x, int y) {
+	glColor3d(1, 1, 1);
+	void *font = GLUT_BITMAP_TIMES_ROMAN_24;
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+	glMatrixMode(GL_PROJECTION);
+	double *matrix = new double[16];
+	glGetDoublev(GL_PROJECTION_MATRIX, matrix);
+	glLoadIdentity();
+	glOrtho(10, 500, 10, 500, -10, 10);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	glPushMatrix();
+	glLoadIdentity();
+	glRasterPos2i(x, y);
+	for (int i = 0; i < length; i++){
+		glutBitmapCharacter(font, text[i]);
+	}
+	glPopMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glLoadMatrixd(matrix);
+	glMatrixMode(GL_MODELVIEW);
+	glDisable(GL_BLEND);
 }
 
 void Board::Reset_Enemies() {
@@ -173,32 +236,32 @@ void Board::ResetGame(){
 	Reset_Enemies();
 }
 
-void Board::swap(Node * a, Node * b){
-	Node* c = a;
-	a = b;
-	b = c;
-}
 
 /// Game Handle - I.e. colllision, points 
-
 void Board::Advance(){
 	PacMan->Image->advance();
 	PacMan->Image->Shift(PacMan->Dir);
 }
-
-void Board::ChangePMDir(){
-	if (NextDir != ' ') {
+void Board::ChangePMDir() {
+	bool check = true;
+	if (Lives < 0) {
+		Loss = true;
+	}
+	if (PacMan->next != nullptr) {
+		if (PacMan->next->getNext(NextDir) == nullptr) {
+			check = false;
+		}
+	}
+	if (NextDir != ' ' && check) {
 		PacMan->Image->resume();
 		PacMan->Image->setPos(NextDir);
 		PacMan->Dir = NextDir;
-		
-		if(NextDir == ' ')
-			cout <<  " NextDir == ' ' "<< endl;
+
 		if(PacMan->next == nullptr){ 
 			Node *tmp = new Node(PacMan->prev->getNext(NextDir)->ID, 
-								PacMan->prev->getNext(NextDir)->CX, 
-								PacMan->prev->getNext(NextDir)->CY,
-								PacMan->prev->getNext(NextDir)->Adj);
+								 PacMan->prev->getNext(NextDir)->CX, 
+								 PacMan->prev->getNext(NextDir)->CY,
+								 PacMan->prev->getNext(NextDir)->Adj);
 			delete PacMan->next;
 			PacMan->next = new Node(tmp->ID, tmp->CX, tmp->CY, tmp->Adj);
  			delete tmp;
@@ -210,8 +273,6 @@ void Board::ChangePMDir(){
 
 				/// Switch next to the next->next
 			Node *tmp = nullptr;
-			if(PacMan->next->getNext(NextDir) == nullptr)
-				cout << "Issues" << endl;
 
 			tmp = new Node(PacMan->next->getNext(NextDir)->ID,
 				PacMan->next->getNext(NextDir)->CX,
@@ -224,36 +285,38 @@ void Board::ChangePMDir(){
 		}
 		
 
-		cout << " asdfas :" << endl;
-		cout << PacMan->next->CX << " " << PacMan->next->CY << endl;
-
-		//Make this into a new player function
-		PacMan->Image->setx(PacMan->next->CX);
-		PacMan->Image->sety(PacMan->next->CY);
-		//PacMan->Image->decX(PacMan->Image->getw() / 2);
-		//PacMan->Image->incY(PacMan->Image->geth() / 2);
+		// Make this into a new player function
+		//PacMan->Image->setx(PacMan->next->CX);
+		//PacMan->Image->sety(PacMan->next->CY);
+		// PacMan->Image->decX(PacMan->Image->getw() / 2);
+		// PacMan->Image->incY(PacMan->Image->geth() / 2);
 		NextDir = ' ';
 	}
 	else {
+
 		PacMan->Image->pause();
-		PacMan->Dir = NextDir;
+		PacMan->Dir = ' ';
 		PacMan->Image->setPos(' ');
 	}
 }
-
 bool Board::Reached(){
-	cout << PacMan->next->CX << " VS " << PacMan->Image->getx() + (PacMan->Image->getw() / 2) << " AND " <<
-			PacMan->next->CY << " VS " << PacMan->Image->gety() - (PacMan->Image->geth() / 2) << endl;
 	return(Aproximate(PacMan->next->CX, PacMan->Image->getx() + (PacMan->Image->getw() / 2)) &&
 		Aproximate(PacMan->next->CY, PacMan->Image->gety() - (PacMan->Image->geth() / 2)));
 }
-
 bool Board::Collide(){
 	return false;
 }
-
-bool Board::Points(){
-	return false;
+void Board::Points(){
+	float diff;
+	for (vector<Object*>::iterator it = Stash.begin(); it != Stash.end(); ++it) {
+		if ((*it)->isVisible) {
+			diff = sqrt(pow(PacMan->Image->getx() - (*it)->X, 2) + pow(PacMan->Image->gety() - (*it)->Y, 2));
+			if (diff < 4*(PacMan->Image->getw()/5)) {
+				(*it)->isVisible = false;
+				Score++;
+			}
+		}
+	}
 }
 
 bool Board::Aproximate(float a, float b){

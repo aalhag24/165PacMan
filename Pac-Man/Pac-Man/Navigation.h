@@ -16,6 +16,8 @@ using namespace std;
 class Navigation {
 public:
 	Node * StartNode;
+	Node * LeftEdge;
+	Node * RightEdge;
 	vector<Node*> List;
 
 	Navigation();
