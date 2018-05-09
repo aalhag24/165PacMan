@@ -1,5 +1,6 @@
 #include "Board.h"
 #include "stdafx.h"
+#include "Enemy.h"
 #include <cassert>
 #include <iostream>    
 #include <iomanip> 
@@ -22,27 +23,9 @@ Board::Board(){
 
 	Field = new Navigation();
 	Field->Initialize();
-	PacMan = new Player(Field->StartNode);
-	PacMan->Image->setPos(' ');
-	PacMan->Image->animate();
 	Initialize();
-
-	Uno = new Enemy(Field->List[66]);
-		Uno->Image->animate();
-		Uno->setRow(1);
-		Uno->Image->setPos('L');
-		Uno->Image->pause();
-
-	Dos = new Enemy(Field->List[67]);
-		Dos->Image->animate();
-		Dos->setRow(2);
-		Dos->Image->setPos('R');
-		Dos->Image->pause();
-	Tres = new Enemy(Field->List[68]);
-		Tres->Image->animate();
-		Tres->setRow(3);
-		Tres->Image->setPos('L');
-		Tres->Image->pause();
+	Initialize_PacMan();
+	Initialize_Enemies();
 
 	SelectionScreen = true;
 	isMoving = false;
@@ -69,6 +52,8 @@ Board::~Board(){
 	delete Field;
 
 	for (vector<Object*>::iterator it = Stash.begin(); it != Stash.end(); ++it)
+		delete (*it);
+	for (vector<Enemy*>::iterator it = EnemyList.begin(); it != EnemyList.end(); ++it)
 		delete (*it);
 }
 
@@ -122,6 +107,32 @@ void Board::Initialize(){
 	myfile2.close();
 
 }
+void Board::CheckEDir(){
+	Node *tmp;
+	for (vector<Enemy*>::iterator it = EnemyList.begin(); it != EnemyList.end(); ++it) {
+		if (Reached((*it))) {
+			if ((*it)->next == nullptr) {
+				tmp = (*it)->next->PickRandNeighbor();
+				(*it)->next = tmp;
+			}
+			else {
+				(*it)->prev = (*it)->next;
+				tmp = (*it)->next->PickRandNeighbor();
+				(*it)->next = tmp;
+			}
+			/// Change the enemy pos here
+			char D = (*it)->prev->NodeDirection((*it)->next);
+			(*it)->Image->setPos(D);
+			(*it)->Dir = D;
+
+			//(*it)->Image->setx((*it)->next->CX);
+			//(*it)->Image->sety((*it)->next->CY);
+			// PacMan->Image->decX(PacMan->Image->getw() / 2);
+			// PacMan->Image->incY(PacMan->Image->geth() / 2);
+		}
+	}
+}
+
 void Board::Handle(float x, float y){
 	if (Loss) {
 		if (PlayAgain->contains(x, y)) {
@@ -150,15 +161,32 @@ void Board::keyPressHandle(unsigned char key) {
 		delete LiveSign;
 
 		Stash.clear();
+		EnemyList.clear();
 		delete Field;
-
-		delete Uno;
-		delete Dos;
-		delete Tres;
 		delete PacMan;
 		exit(0);
 	}
 }
+
+void Board::Initialize_Enemies() {
+	int i = 0;
+	int A[] = { 66, 67, 68 };
+	char D[] = { 'L', 'R', 'L' };
+	for (vector<Enemy*>::iterator it = EnemyList.begin(); it != EnemyList.end(); ++it) {
+		EnemyList.push_back(new Enemy(Field->List[A[i]]));
+		EnemyList[i]->Image->animate();
+		EnemyList[i]->setRow(i+1);
+		EnemyList[i]->Image->setPos(D[i]);
+		EnemyList[i]->Image->pause();
+		i++;
+	}
+}
+void Board::Initialize_PacMan(){
+	PacMan = new Player(Field->StartNode);
+	PacMan->Image->setPos(' ');
+	PacMan->Image->animate();
+}
+
 void Board::specialKeyPressHandle(int key){
 	/// THIS SHOULD BE ALL THAT MATTERS
 	if (!SelectionScreen) {
@@ -192,9 +220,8 @@ void Board::GScreen(){
 	ScoreSign->draw();
 	LiveSign->draw();
 
-	Uno->draw();
-	Dos->draw();
-	Tres->draw();
+	for (vector<Enemy*>::iterator it = EnemyList.begin(); it != EnemyList.end(); ++it)
+		(*it)->draw();
 	
 	for (vector<Object*>::iterator it = Stash.begin(); it != Stash.end(); ++it)
 		if((*it)->isVisible)
@@ -298,20 +325,36 @@ void Board::ResetGame(){
 	Score = 0;
 	Lives = 1;
 }
-
+void Board::Points() {
+	float diff;
+	for (vector<Object*>::iterator it = Stash.begin(); it != Stash.end(); ++it) {
+		if ((*it)->isVisible) {
+			diff = sqrt(pow(PacMan->Image->getx() - (*it)->X, 2) + pow(PacMan->Image->gety() - (*it)->Y, 2));
+			if (diff < 4 * (PacMan->Image->getw() / 5)) {
+				(*it)->isVisible = false;
+				if ((*it)->id >= 212) {
+					Score += 100;
+				}
+				else {
+					Score += 10;
+				}
+			}
+		}
+	}
+	if (Score >= 2500) {
+		cout << "Won" << endl;
+		Won = true;
+	}
+}
 
 /// Game Handle - I.e. colllision, points 
 void Board::Advance(){
 	PacMan->Image->advance();
 	PacMan->Image->Shift(PacMan->Dir);
-	/*
-	Uno->Image->advance();
-	Uno->Image->Shift(PacMan->Dir);
-	Dos->Image->advance();
-	Dos->Image->Shift(PacMan->Dir);
-	Tres->Image->advance();
-	Tres->Image->Shift(PacMan->Dir);
-	*/
+	for(vector<Enemy*>::iterator it = EnemyList.begin(); it!=EnemyList.end(); ++it){
+		(*it)->Image->advance();
+		(*it)->Image->Shift((*it)->Dir);
+	}
 }
 void Board::ChangePMDir() {
 	bool check = true;
@@ -338,11 +381,8 @@ void Board::ChangePMDir() {
  			delete tmp;
 		}
 		else {	
-				/// Switch prev = next
 			delete PacMan->prev;
 			PacMan->prev = new Node(PacMan->next->ID, PacMan->next->CX, PacMan->next->CY, PacMan->next->Adj);
-
-				/// Switch next to the next->next
 			Node *tmp = nullptr;
 
 			tmp = new Node(PacMan->next->getNext(NextDir)->ID,
@@ -355,16 +395,9 @@ void Board::ChangePMDir() {
 			delete tmp;
 		}
 		
-
-		// Make this into a new player function
-		//PacMan->Image->setx(PacMan->next->CX);
-		//PacMan->Image->sety(PacMan->next->CY);
-		// PacMan->Image->decX(PacMan->Image->getw() / 2);
-		// PacMan->Image->incY(PacMan->Image->geth() / 2);
 		NextDir = ' ';
 	}
 	else {
-
 		PacMan->Image->pause();
 		PacMan->Dir = ' ';
 		PacMan->Image->setPos(' ');
@@ -372,31 +405,14 @@ void Board::ChangePMDir() {
 }
 bool Board::Reached(){
 	return(Aproximate(PacMan->next->CX, PacMan->Image->getx() + (PacMan->Image->getw() / 2)) &&
-		Aproximate(PacMan->next->CY, PacMan->Image->gety() - (PacMan->Image->geth() / 2)));
+		   Aproximate(PacMan->next->CY, PacMan->Image->gety() - (PacMan->Image->geth() / 2)));
+}
+bool Board::Reached(Enemy * a) {
+	return(Aproximate(a->next->CX, a->Image->getx() + (a->Image->getw() / 2)) &&
+		   Aproximate(a->next->CY, a->Image->gety() - (a->Image->geth() / 2)));
 }
 bool Board::Collide(){
 	return false;
-}
-void Board::Points(){
-	float diff;
-	for (vector<Object*>::iterator it = Stash.begin(); it != Stash.end(); ++it) {
-		if ((*it)->isVisible) {
-			diff = sqrt(pow(PacMan->Image->getx() - (*it)->X, 2) + pow(PacMan->Image->gety() - (*it)->Y, 2));
-			if (diff < 4*(PacMan->Image->getw()/5)) {
-				(*it)->isVisible = false;
-				if ((*it)->id >= 212) {
-					Score += 100;
-				}
-				else {
-					Score += 10;
-				}
-			}
-		}
-	}
-	if (Score >= 2500) {
-		cout << "Won" << endl;
-		Won = true;
-	}
 }
 
 bool Board::Aproximate(float a, float b){
@@ -415,6 +431,9 @@ bool Board::Status() {
 }
 bool Board::Winning(){
 	return Won;
+}
+void Board::Lossing(bool a){
+	Loss = a;
 }
 char Board::Switch(char D) {
 	switch (D) {

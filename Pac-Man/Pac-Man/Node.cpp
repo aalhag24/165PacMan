@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Node.h"
+#include <stdlib.h>
 
 Node::Node(int n, float x, float y){
 	CX = x; CY = y;
@@ -69,7 +70,24 @@ bool Node::isNotOption(char D) {
 	std::vector<Node*>::iterator it = Adj.begin();
 	for (; it != Adj.end(); ++it) {
 		if (NodeDirection((*it)) == D)
-			false;
+			return false;
 	}
 	return true;
+}
+
+Node * Node::PickRandNeighbor(){
+	int choices = Adj.size();
+	int Rand;
+	char D;
+	do {
+		Rand = rand() % choices;
+		switch (Rand) {
+			case 0: D = 'L'; break;
+			case 1: D = 'R'; break;
+			case 2: D = 'D'; break;
+			case 3: D = 'U'; break;
+			default: D = ' '; break;
+		}
+	} while (!isNotOption(D));
+	return getNext(D);
 }

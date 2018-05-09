@@ -20,6 +20,7 @@ public:
 	char NodeDirection(Node *);
 	Node* getNext(char);
 	bool isNotOption(char);
+	Node* PickRandNeighbor();
 };
 
 #endif // !NODE_H

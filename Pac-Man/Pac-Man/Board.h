@@ -33,18 +33,23 @@ class Board {
 	TexRect * LiveSign;
 
 	vector<Object*> Stash;
-	Navigation * Field;
+	vector<Enemy*> EnemyList;
 
-	Enemy *Uno, *Dos, *Tres;
+	Navigation * Field;
 	Player * PacMan;
 
 	int Score, Lives;
 	float Error;
 	char Choice,NextDir;
+	bool SelectionScreen, isMoving,
+		GameStarted, Loss, Started, Won;
 
 	void Reset_Enemies();
 	void Reset_Dots();
 	void Reset_PacMan();
+
+	void Initialize_Enemies();
+	void Initialize_PacMan();
 
 	void SScreen();
 	void GScreen();
@@ -52,19 +57,19 @@ class Board {
 
 	void ExitGame();
 
+	void Initialize();
+	bool Reached(Enemy *);
+	void drawText(const char *text, int length, int x, int y);
+
 	bool Aproximate(float, float);
 	char Switch(char);
 
 public:
-	bool SelectionScreen, isMoving, 
-		 GameStarted, Loss, 
-		 Started = false, Won;
 
 	Board();
 	~Board();
 
 	void draw();
-	void Initialize();
 
 	void Handle(float, float);
 	void keyPressHandle(unsigned char);
@@ -73,17 +78,17 @@ public:
 	void Advance();
 	void ChangePMDir();
 	void ResetGame();
-	void drawText(const char *text, int length, int x, int y);
+	void Points();
+	void CheckEDir();
 
 	bool Reached();
 	bool Collide();
-	void Points();
 
 	bool Availiable();
 	bool Ready();
 	bool Status();
 	bool Winning();
-
+	void Lossing(bool);
 };
 
 #endif // !BOARD_H

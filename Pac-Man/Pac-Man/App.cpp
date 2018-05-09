@@ -8,6 +8,7 @@ void app_timer(int value) {
 	if (MF->MainFrame->Ready()) {
 		//singleton->MainFrame.Title->animate();
 		MF->MainFrame->Advance();
+		MF->MainFrame->CheckEDir();
 		if (MF->MainFrame->Status()) {
 			MF->MainFrame->ChangePMDir();
 		}
@@ -18,7 +19,7 @@ void app_timer(int value) {
 
 		}
 		if (MF->MainFrame->Winning()) {
-			MF->MainFrame->Loss = true;
+			MF->MainFrame->Lossing(true);
 		}
 		MF->MainFrame->Points();  //PacMan collision with dots gets points
 	}
