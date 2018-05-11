@@ -358,13 +358,10 @@ void Board::Advance(){
 }
 void Board::ChangePMDir() {
 	bool check = true;
-	if (Lives < 0) {
-		Loss = true;
-	}
+	if (Lives < 0) { Loss = true; }
 	if (PacMan->next != nullptr) {
-		if (PacMan->next->getNext(NextDir) == nullptr) {
+		if (PacMan->next->getNext(NextDir) == nullptr)
 			check = false;
-		}
 	}
 	if (NextDir != ' ' && check) {
 		PacMan->Image->resume();
@@ -382,7 +379,10 @@ void Board::ChangePMDir() {
 		}
 		else {	
 			delete PacMan->prev;
-			PacMan->prev = new Node(PacMan->next->ID, PacMan->next->CX, PacMan->next->CY, PacMan->next->Adj);
+			PacMan->prev = new Node(PacMan->next->ID, 
+									PacMan->next->CX, 
+									PacMan->next->CY, 
+									PacMan->next->Adj);
 			Node *tmp = nullptr;
 
 			tmp = new Node(PacMan->next->getNext(NextDir)->ID,
@@ -394,7 +394,6 @@ void Board::ChangePMDir() {
 			PacMan->next = new Node(tmp->ID, tmp->CX, tmp->CY, tmp->Adj);
 			delete tmp;
 		}
-		
 		NextDir = ' ';
 	}
 	else {
@@ -434,6 +433,12 @@ bool Board::Winning(){
 }
 void Board::Lossing(bool a){
 	Loss = a;
+}
+void Board::ResetBoard()
+{
+}
+void Board::DecLives()
+{
 }
 char Board::Switch(char D) {
 	switch (D) {

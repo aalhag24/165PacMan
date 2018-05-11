@@ -9,8 +9,8 @@ class Enemy: public Navigation, public Object {
 public:
 	Node * next;
 	Node * prev;
-
 	char Dir;
+	AnimatedRect * Images;
 
 	Enemy(Node *);
 	~Enemy();

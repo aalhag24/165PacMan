@@ -3,8 +3,10 @@
 
 #include "TexRect.h"
 #include "AnimatedRect.h"
+#include "Parent.h"
+#include "Node.h"
 
-class Object {
+class Object: public Parent {
 public:
 	bool isVisible;
 	static int ID;
@@ -12,13 +14,19 @@ public:
 	float X, Y, W, H;
 	AnimatedRect *Image;
 
+	Object(float x, float y) : X(x), Y(y) {}
+	Object(Node *) {} 
+	virtual ~Object()=0;
+
 	void draw() {
 		Image->draw();
 	}
 
-	bool contains(const Object &G) {
-		float l = sqrt(pow(G.X - X, 2) + pow(G.Y - Y, 2));
-		if (l < ((G.W + W) / 2)) { return true; }
+	bool contains(const Parent *G) {
+		Object *P = (Object *)G;
+
+		float l = sqrt(pow(P->X - X, 2) + pow(P->Y - Y, 2));
+		if (l < P->W) { return true; }
 		else { return false; }
 	}
 

@@ -12,6 +12,8 @@ public:
 	~SDots();
 
 	void draw();
+	bool contains(const Parent*);
+	bool contains(const float, const float);
 };
 
 #endif // !SDOTS_H

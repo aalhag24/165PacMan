@@ -161,6 +161,7 @@
     <ClInclude Include="Navigation.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="Parent.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="RgbImage.h" />
@@ -180,6 +181,7 @@
     <ClCompile Include="GlutApp.cpp" />
     <ClCompile Include="Navigation.cpp" />
     <ClCompile Include="Node.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="Pac-Man.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RgbImage.cpp" />

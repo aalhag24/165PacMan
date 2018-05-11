@@ -89,6 +89,9 @@ public:
 	bool Status();
 	bool Winning();
 	void Lossing(bool);
+
+	void ResetBoard();
+	void DecLives();
 };
 
 #endif // !BOARD_H

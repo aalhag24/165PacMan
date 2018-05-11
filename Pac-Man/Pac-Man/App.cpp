@@ -16,7 +16,8 @@ void app_timer(int value) {
 			MF->MainFrame->ChangePMDir();
 		}
 		if (MF->MainFrame->Collide()) { //Ememies and PacMan Collide
-
+			MF->MainFrame->ResetBoard();
+			MF->MainFrame->DecLives();
 		}
 		if (MF->MainFrame->Winning()) {
 			MF->MainFrame->Lossing(true);

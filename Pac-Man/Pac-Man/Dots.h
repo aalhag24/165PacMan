@@ -12,6 +12,8 @@ public:
 	~Dots();
 	
 	void draw();
+	bool contains(const Parent*);
+	bool contains(const float, const float);
 };
 
 #endif // !DOTS_H

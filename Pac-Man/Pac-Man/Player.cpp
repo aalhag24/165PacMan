@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 
-Player::Player(Node *a) {
+Player::Player(Node *a): Object(a) {
 	prev = a;
 	next = nullptr;
 	Dir = 'L';

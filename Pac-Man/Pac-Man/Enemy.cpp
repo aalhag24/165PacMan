@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Enemy.h"
 
-Enemy::Enemy(Node *a) {
+Enemy::Enemy(Node *a): Object(a) {
 	prev = a;
 	next = nullptr;
 	Dir = 'L';
