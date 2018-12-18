@@ -8,7 +8,8 @@ void app_timer(int value) {
 	if (MF->MainFrame->Ready()) {
 		//singleton->MainFrame.Title->animate();
 		MF->MainFrame->Advance();
-		MF->MainFrame->CheckEDir();
+		MF->MainFrame->CheckEnamyDir();
+
 		if (MF->MainFrame->Status()) {
 			MF->MainFrame->ChangePMDir();
 		}

@@ -107,7 +107,8 @@ void Board::Initialize(){
 	myfile2.close();
 
 }
-void Board::CheckEDir(){
+
+void Board::CheckEnamyDir(){
 	Node *tmp;
 	for (vector<Enemy*>::iterator it = EnemyList.begin(); it != EnemyList.end(); ++it) {
 		if (Reached((*it))) {
@@ -167,26 +168,6 @@ void Board::keyPressHandle(unsigned char key) {
 		exit(0);
 	}
 }
-
-void Board::Initialize_Enemies() {
-	int i = 0;
-	int A[] = { 66, 67, 68 };
-	char D[] = { 'L', 'R', 'L' };
-	for (vector<Enemy*>::iterator it = EnemyList.begin(); it != EnemyList.end(); ++it) {
-		EnemyList.push_back(new Enemy(Field->List[A[i]]));
-		EnemyList[i]->Image->animate();
-		EnemyList[i]->setRow(i+1);
-		EnemyList[i]->Image->setPos(D[i]);
-		EnemyList[i]->Image->pause();
-		i++;
-	}
-}
-void Board::Initialize_PacMan(){
-	PacMan = new Player(Field->StartNode);
-	PacMan->Image->setPos(' ');
-	PacMan->Image->animate();
-}
-
 void Board::specialKeyPressHandle(int key){
 	/// THIS SHOULD BE ALL THAT MATTERS
 	if (!SelectionScreen) {
@@ -199,10 +180,12 @@ void Board::specialKeyPressHandle(int key){
 		}
 		if (Choice != ' ') {
 			NextDir = Choice;
-			if (PacMan->next == nullptr && PacMan->setChoice(Choice)) { // Sets the Initial Dir
+			// Sets the Initial Dir
+			if (PacMan->next == nullptr && PacMan->setChoice(Choice)) {
 				ChangePMDir();
 			}
-			else if (PacMan->getChoice(Choice)) { // Checks if the prev dir is the one we switch to
+			// Checks if the prev dir is the one we switch to
+			else if (PacMan->getChoice(Choice)) {
 				ChangePMDir();
 			}
 		}
@@ -285,8 +268,31 @@ void Board::drawText(const char *text, int length, int x, int y) {
 	glDisable(GL_BLEND);
 }
 
-void Board::Reset_Enemies() {
+// Initialize all objects
+void Board::Initialize_Enemies() {
+	int i = 0;
+	int A[] = { 66, 67, 68 };
+	char D[] = { 'L', 'R', 'L' };
+	for (vector<Enemy*>::iterator it = EnemyList.begin(); it != EnemyList.end(); ++it) {
+		EnemyList.push_back(new Enemy(Field->List[A[i]], D[i]));
+		EnemyList[i]->Image->animate();
+		EnemyList[i]->setRow(i + 1);
+		EnemyList[i]->Image->setPos(D[i]);
+		EnemyList[i]->Image->pause();
+		i++;
+	}
+}
+void Board::Initialize_PacMan() {
+	PacMan = new Player(Field->StartNode);
+	PacMan->Image->setPos(' ');
+	PacMan->Image->animate();
+}
 
+// Reset all objects
+void Board::Reset_Enemies() {
+	for (vector<Enemy*>::iterator it = EnemyList.begin(); it != EnemyList.end(); ++it) {
+		(*it)->Reset();
+	}
 }
 void Board::Reset_Dots() {
 	for (vector<Object*>::iterator it = Stash.begin(); it != Stash.end(); ++it)
@@ -325,6 +331,7 @@ void Board::ResetGame(){
 	Score = 0;
 	Lives = 1;
 }
+
 void Board::Points() {
 	float diff;
 	for (vector<Object*>::iterator it = Stash.begin(); it != Stash.end(); ++it) {
@@ -411,13 +418,17 @@ bool Board::Reached(Enemy * a) {
 	return(Aproximate(a->next->CX, a->Image->getx() + (a->Image->getw() / 2)) &&
 		   Aproximate(a->next->CY, a->Image->gety() - (a->Image->geth() / 2)));
 }
+
 bool Board::Collide(){
+
+	/// Complete This
+
 	return false;
 }
 
 bool Board::Aproximate(float a, float b){
-	// a is the pos we want to be at
-	// b is current pos
+	// a is the position we want to be at
+	// b is current position
 	return (b > a - Error && b < a + Error);
 }
 bool Board::Availiable() {
@@ -437,11 +448,11 @@ void Board::Lossing(bool a){
 }
 char Board::Switch(char D) {
 	switch (D) {
-	case 'R': D = 'L'; break;
-	case 'L': D = 'R'; break;
-	case 'D': D = 'U'; break;
-	case 'U': D = 'D'; break;
-	default:   break;
+		case 'R': D = 'L'; break;
+		case 'L': D = 'R'; break;
+		case 'D': D = 'U'; break;
+		case 'U': D = 'D'; break;
+		default:   break;
 	}
 	return D;
 }

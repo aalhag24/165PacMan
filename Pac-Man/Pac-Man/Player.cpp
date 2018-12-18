@@ -29,7 +29,7 @@ bool Player::getChoice(char D){
 	return false;
 }
 
-// Finds if the next Choice is a valid one
+// Finds if the next Choice is valid
 bool Player::NextChoice(char D){
 	for (vector<Node*>::iterator it = next->Adj.begin(); it != next->Adj.end(); ++it) {
 		if (next->NodeDirection(*it) == D) {
@@ -47,4 +47,10 @@ bool Player::setChoice(char D) {
 		}
 	}
 	return false;
+}
+
+// Reset the player to the start
+void Player::Reset() {
+	next=Origin;
+	prev=NULL;
 }

@@ -1,12 +1,15 @@
 #include "stdafx.h"
 #include "Enemy.h"
 
-Enemy::Enemy(Node *a) {
+Enemy::Enemy(Node *a, char d) {
 	prev = a;
 	next = nullptr;
 	Dir = 'L';
 	isVisible = true;
 	X = a->CX; Y = a->CY;
+
+	Origin = a;
+	ODir = Dir;
 
 	Image = new AnimatedRect("Enemies.bmp", 12, 12, X, Y, 0.1f, 0.1f);
 	Image->decX(Image->getw() / 2);
@@ -52,4 +55,10 @@ bool Enemy::setChoice(char D) {
 
 void Enemy::setRow(int a){
 	Image->setRow(a);
+}
+
+void Enemy::Reset(){
+	next=Origin;
+	prev=NULL;
+	Dir = ODir;
 }

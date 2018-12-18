@@ -54,14 +54,13 @@ class Board {
 	void SScreen();
 	void GScreen();
 	void PAScreen();
-
 	void ExitGame();
 
 	void Initialize();
-	bool Reached(Enemy *);
 	void drawText(const char *text, int length, int x, int y);
 
 	bool Aproximate(float, float);
+	bool Reached(Enemy *);
 	char Switch(char);
 
 public:
@@ -79,7 +78,8 @@ public:
 	void ChangePMDir();
 	void ResetGame();
 	void Points();
-	void CheckEDir();
+
+	void CheckEnamyDir();
 
 	bool Reached();
 	bool Collide();

@@ -24,7 +24,7 @@
     <ProjectGuid>{329EDB8F-DAA9-43BE-91A3-F8DFC726CE2A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>PacMan</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -79,6 +79,10 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <LibraryPath>D:\Archieve\Coding\Source\Repos\165PacMan\Pac-Man\Pac-Man\windows;D:\Archieve\Coding\Source\Repos\165PacMan\Pac-Man\Pac-Man\SOIL;D:\Archieve\Coding\Source\Repos\165PacMan\Pac-Man\Pac-Man\freeglut;$(LibraryPath)</LibraryPath>
+    <ReferencePath>D:\Archieve\Coding\Source\Repos\165PacMan\Pac-Man\Pac-Man\windows;D:\Archieve\Coding\Source\Repos\165PacMan\Pac-Man\Pac-Man\SOIL;D:\Archieve\Coding\Source\Repos\165PacMan\Pac-Man\Pac-Man\freeglut;$(LibraryPath);$(ReferencePath)</ReferencePath>
+    <SourcePath>D:\Archieve\Coding\Source\Repos\165PacMan\Pac-Man\Pac-Man\windows;D:\Archieve\Coding\Source\Repos\165PacMan\Pac-Man\Pac-Man\SOIL;D:\Archieve\Coding\Source\Repos\165PacMan\Pac-Man\Pac-Man\freeglut;$(LibraryPath);$(SourcePath)</SourcePath>
+    <IncludePath>D:\Archieve\Coding\Source\Repos\165PacMan\Pac-Man\Pac-Man\windows;D:\Archieve\Coding\Source\Repos\165PacMan\Pac-Man\Pac-Man\SOIL;D:\Archieve\Coding\Source\Repos\165PacMan\Pac-Man\Pac-Man\freeglut;$(LibraryPath);D:\Archieve\Coding\Source\Repos\165PacMan\Pac-Man\Pac-Man\x64;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -154,7 +158,6 @@
     <ClInclude Include="AnimatedRect.h" />
     <ClInclude Include="App.h" />
     <ClInclude Include="Board.h" />
-    <ClInclude Include="Border.h" />
     <ClInclude Include="Dots.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="GlutApp.h" />
@@ -168,8 +171,6 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TexRect.h" />
-    <ClInclude Include="Wall.h" />
-    <ClInclude Include="XY.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnimatedRect.cpp" />

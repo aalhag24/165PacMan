@@ -9,10 +9,12 @@ class Enemy: public Navigation, public Object {
 public:
 	Node * next;
 	Node * prev;
+	Node * Origin;
 
 	char Dir;
+	char ODir;
 
-	Enemy(Node *);
+	Enemy(Node *, char);
 	~Enemy();
 
 	bool getChoice(char);
@@ -20,6 +22,7 @@ public:
 	bool setChoice(char);
 
 	void setRow(int);
+	void Reset();
 };
 
 #endif // !ENEMY_H
