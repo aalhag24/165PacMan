@@ -65,6 +65,7 @@ void Board::draw() {
 	else
 		GScreen();
 }
+// Initialize all objects
 void Board::Initialize(){
 	int Num, ID; float XVal, YVal, pos = 0;
 	ifstream myfile("DotsList.txt", ios::out | ios::binary);
@@ -107,33 +108,26 @@ void Board::Initialize(){
 	myfile2.close();
 
 }
-
-void Board::CheckEnamyDir(){
-	Node *tmp;
+void Board::Initialize_PacMan() {
+	PacMan = new Player(Field->StartNode);
+	PacMan->Image->setPos(' ');
+	PacMan->Image->animate();
+}
+void Board::Initialize_Enemies() {
+	int i = 0;
+	int A[] = { 66, 67, 68 };
+	char D[] = { 'L', 'R', 'L' };
 	for (vector<Enemy*>::iterator it = EnemyList.begin(); it != EnemyList.end(); ++it) {
-		if (Reached((*it))) {
-			if ((*it)->next == nullptr) {
-				tmp = (*it)->next->PickRandNeighbor();
-				(*it)->next = tmp;
-			}
-			else {
-				(*it)->prev = (*it)->next;
-				tmp = (*it)->next->PickRandNeighbor();
-				(*it)->next = tmp;
-			}
-			/// Change the enemy pos here
-			char D = (*it)->prev->NodeDirection((*it)->next);
-			(*it)->Image->setPos(D);
-			(*it)->Dir = D;
-
-			//(*it)->Image->setx((*it)->next->CX);
-			//(*it)->Image->sety((*it)->next->CY);
-			// PacMan->Image->decX(PacMan->Image->getw() / 2);
-			// PacMan->Image->incY(PacMan->Image->geth() / 2);
-		}
+		EnemyList.push_back(new Enemy(Field->List[A[i]], D[i]));
+		EnemyList[i]->Image->animate();
+		EnemyList[i]->setRow(i + 1);
+		EnemyList[i]->Image->setPos(D[i]);
+		EnemyList[i]->Image->pause();
+		i++;
 	}
 }
 
+// Handle Events
 void Board::Handle(float x, float y){
 	if (Loss) {
 		if (PlayAgain->contains(x, y)) {
@@ -192,6 +186,7 @@ void Board::specialKeyPressHandle(int key){
 	}
 }
 
+// Draw Screens
 void Board::SScreen(){
 	Title->draw();
 	StartGame->draw();
@@ -224,6 +219,8 @@ void Board::PAScreen() {
 	PlayAgain->draw();
 	Exit->draw();
 }
+
+// Exit parameters
 void Board::ExitGame() {
 	delete painting;
 	delete background;
@@ -266,26 +263,6 @@ void Board::drawText(const char *text, int length, int x, int y) {
 	glLoadMatrixd(matrix);
 	glMatrixMode(GL_MODELVIEW);
 	glDisable(GL_BLEND);
-}
-
-// Initialize all objects
-void Board::Initialize_Enemies() {
-	int i = 0;
-	int A[] = { 66, 67, 68 };
-	char D[] = { 'L', 'R', 'L' };
-	for (vector<Enemy*>::iterator it = EnemyList.begin(); it != EnemyList.end(); ++it) {
-		EnemyList.push_back(new Enemy(Field->List[A[i]], D[i]));
-		EnemyList[i]->Image->animate();
-		EnemyList[i]->setRow(i + 1);
-		EnemyList[i]->Image->setPos(D[i]);
-		EnemyList[i]->Image->pause();
-		i++;
-	}
-}
-void Board::Initialize_PacMan() {
-	PacMan = new Player(Field->StartNode);
-	PacMan->Image->setPos(' ');
-	PacMan->Image->animate();
 }
 
 // Reset all objects
@@ -408,6 +385,31 @@ void Board::ChangePMDir() {
 		PacMan->Image->pause();
 		PacMan->Dir = ' ';
 		PacMan->Image->setPos(' ');
+	}
+}
+void Board::CheckEnemyDir() {
+	Node *tmp;
+	for (vector<Enemy*>::iterator it = EnemyList.begin(); it != EnemyList.end(); ++it) {
+		if (Reached((*it))) {
+			if ((*it)->next == nullptr) {
+				tmp = (*it)->next->PickRandNeighbor();
+				(*it)->next = tmp;
+			}
+			else {
+				(*it)->prev = (*it)->next;
+				tmp = (*it)->next->PickRandNeighbor();
+				(*it)->next = tmp;
+			}
+			/// Change the enemy pos here
+			char D = (*it)->prev->NodeDirection((*it)->next);
+			(*it)->Image->setPos(D);
+			(*it)->Dir = D;
+
+			//(*it)->Image->setx((*it)->next->CX);
+			//(*it)->Image->sety((*it)->next->CY);
+			//PacMan->Image->decX(PacMan->Image->getw() / 2);
+			//PacMan->Image->incY(PacMan->Image->geth() / 2);
+		}
 	}
 }
 bool Board::Reached(){

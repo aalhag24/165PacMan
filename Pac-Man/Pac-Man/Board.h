@@ -79,7 +79,7 @@ public:
 	void ResetGame();
 	void Points();
 
-	void CheckEnamyDir();
+	void CheckEnemyDir();
 
 	bool Reached();
 	bool Collide();

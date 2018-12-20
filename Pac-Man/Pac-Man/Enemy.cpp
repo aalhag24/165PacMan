@@ -4,7 +4,7 @@
 Enemy::Enemy(Node *a, char d) {
 	prev = a;
 	next = nullptr;
-	Dir = 'L';
+	Dir = d;
 	isVisible = true;
 	X = a->CX; Y = a->CY;
 

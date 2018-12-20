@@ -8,7 +8,7 @@ void app_timer(int value) {
 	if (MF->MainFrame->Ready()) {
 		//singleton->MainFrame.Title->animate();
 		MF->MainFrame->Advance();
-		MF->MainFrame->CheckEnamyDir();
+		MF->MainFrame->CheckEnemyDir();
 
 		if (MF->MainFrame->Status()) {
 			MF->MainFrame->ChangePMDir();
@@ -16,13 +16,17 @@ void app_timer(int value) {
 		else if (MF->MainFrame->Reached()) {
 			MF->MainFrame->ChangePMDir();
 		}
-		if (MF->MainFrame->Collide()) { //Ememies and PacMan Collide
+
+		//Ememies and PacMan Collide
+		if (MF->MainFrame->Collide()) {
 
 		}
 		if (MF->MainFrame->Winning()) {
 			MF->MainFrame->Lossing(true);
 		}
-		MF->MainFrame->Points();  //PacMan collision with dots gets points
+
+		//PacMan collision with dots gets points
+		MF->MainFrame->Points(); 
 	}
 
 	MF->redraw();

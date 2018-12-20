@@ -30,9 +30,6 @@
     <ClInclude Include="GlutApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Rect.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="RgbImage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
